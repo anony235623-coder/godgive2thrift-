@@ -37,8 +37,45 @@ function addToCart(id,name,price){
 }
 
 fetch("/api/auth/me", {
-
     credentials: "include"
+})
+.then(response => response.json())
+.then(user => {
+
+    const accountMenu = document.getElementById("accountMenu");
+
+    if (!accountMenu) return;
+
+    if (!user.authenticated) {
+
+        accountMenu.innerHTML = `
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+        `;
+
+        return;
+    }
+
+    let html = `
+        <a href="/account">
+            👤 ${user.name}
+        </a>
+    `;
+
+    if (user.role === "ADMIN") {
+
+        html += `
+            <a href="/admin">Admin</a>
+        `;
+    }
+
+    html += `
+        <a href="#" onclick="logout();return false;">
+            Logout
+        </a>
+    `;
+
+    accountMenu.innerHTML = html;
 
 })
 
