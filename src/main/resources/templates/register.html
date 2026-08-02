@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Account | GodGive2Thrift</title>
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+*{
+    transition:.25s ease;
+}
+body{
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    background:#111;
+}
+
+.container{
+    display:flex;
+    min-height:100vh;
+}
+
+.left{
+    flex:1;
+    background:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.register-box{
+    width:430px;
+}
+
+.register-box h2{
+    text-align:center;
+    margin-bottom:10px;
+}
+
+.register-box p{
+    text-align:center;
+    color:#777;
+    margin-bottom:30px;
+}
+
+.input-group{
+    position:relative;
+    margin-bottom:20px;
+}
+
+.input-group i{
+    position:absolute;
+    top:16px;
+    left:15px;
+    color:#777;
+}
+
+.input-group input{
+    width:100%;
+    padding:14px 45px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:15px;
+}
+
+.eye{
+    position:absolute;
+    right:15px;
+    top:16px;
+    cursor:pointer;
+}
+
+button{
+
+    background:#1E293B;
+
+    color:white;
+
+    border:none;
+
+    padding:14px 22px;
+
+    border-radius:12px;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:all .25s ease;
+
+}
+
+button:hover{
+
+    background:#F59E0B;
+
+    color:black;
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 25px rgba(0,0,0,.18);
+
+}
+
+button:active{
+
+    transform:scale(.97);
+
+}
+
+.login{
+    text-align:center;
+    margin-top:25px;
+}
+
+.login a{
+    color:#D4AF37;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.right{
+    flex:1;
+    background:
+    linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
+    url("https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1200&q=80");
+    background-size:cover;
+    background-position:center;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:50px;
+}
+
+.right h1{
+    color:#D4AF37;
+    font-size:48px;
+}
+
+.right p{
+    font-size:20px;
+}
+
+@media(max-width:900px){
+
+.container{
+    flex-direction:column;
+}
+
+.right{
+    display:none;
+}
+
+.left{
+    padding:40px;
+}
+
+.register-box{
+    width:100%;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="left">
+
+<div class="register-box">
+
+<h2>Create Account</h2>
+
+<p>Join GodGive2Thrift today.</p>
+
+<div class="input-group">
+
+<i class="fa-solid fa-user"></i>
+
+<input
+type="text"
+id="name"
+placeholder="Full Name">
+
+</div>
+
+<div class="input-group">
+
+<i class="fa-solid fa-envelope"></i>
+
+<input
+type="email"
+id="email"
+placeholder="Email">
+
+</div>
+
+<div class="input-group">
+
+<i class="fa-solid fa-lock"></i>
+
+<input
+type="password"
+id="password"
+placeholder="Password">
+
+<i
+class="fa-solid fa-eye eye"
+onclick="togglePassword()"></i>
+
+</div>
+
+<button onclick="register()">
+
+Create Account
+
+</button>
+
+<div class="login">
+
+Already have an account?
+
+<div id="accountMenu">
+
+<a href="/login" id="loginLink">
+
+Login
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="right">
+
+<div>
+
+<h1>GodGive2Thrift</h1>
+
+<p>
+Premium Thrift Marketplace<br>
+Affordable • Authentic • Vintage Fashion
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="/js/auth.js"></script>
+
+<script>
+
+function togglePassword(){
+
+const input=document.getElementById("password");
+
+input.type = input.type==="password" ? "text" : "password";
+
+}
+
+</script>
+
+</body>
+</html>

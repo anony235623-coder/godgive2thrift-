@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Product Details</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+button,
+input,
+.container,
+img{
+
+transition:.25s ease;
+
+}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f5f5f5;
+}
+
+header{
+background:#111;
+padding:20px 50px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+header h1{
+color:#D4AF37;
+}
+
+header a{
+color:white;
+text-decoration:none;
+margin-left:20px;
+}
+
+.container{
+
+width:90%;
+max-width:1200px;
+
+margin:50px auto;
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:50px;
+
+background:white;
+
+padding:40px;
+
+border-radius:15px;
+
+box-shadow:0 5px 20px rgba(0,0,0,.15);
+
+}
+
+img{
+
+width:100%;
+
+border-radius:15px;
+
+}
+
+.price{
+
+font-size:40px;
+
+color:#D4AF37;
+
+margin:20px 0;
+
+font-weight:bold;
+
+}
+
+.stock{
+
+margin:15px 0;
+
+font-size:18px;
+
+}
+
+.description{
+
+margin-top:20px;
+
+line-height:1.8;
+
+color:#555;
+
+}
+
+button{
+
+    background:#1E293B;
+
+    color:white;
+
+    border:none;
+
+    padding:14px 22px;
+
+    border-radius:12px;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:all .25s ease;
+
+}
+
+button:hover{
+
+    background:#F59E0B;
+
+    color:black;
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 25px rgba(0,0,0,.18);
+
+}
+
+button:active{
+
+    transform:scale(.97);
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>GodGive2Thrift</h1>
+
+<div>
+<a href="/home">🏠 Home</a>
+<a href="/shop">🛍 Shop</a>
+<a href="/cart">🛒 Cart</a>
+<a href="/account">👤 Account</a>
+
+</div>
+
+</header>
+
+<div class="container">
+
+<div>
+
+<img id="image">
+
+</div>
+
+<div>
+
+<h1 id="name"></h1>
+
+
+<div class="price" id="price"></div>
+
+<div id="category"></div>
+
+<div class="stock" id="stock"></div>
+
+<p class="description" id="description"></p>
+
+<hr style="margin:25px 0;">
+
+<h3>Quantity</h3>
+
+<div style="display:flex;align-items:center;gap:10px;margin-top:15px;">
+
+<button
+onclick="decreaseQty()"
+style="width:50px;margin:0;">
+−
+</button>
+
+<input
+id="qty"
+type="number"
+value="1"
+min="1"
+style="
+width:70px;
+padding:10px;
+text-align:center;">
+
+<button
+onclick="increaseQty()"
+style="width:50px;margin:0;">
++
+</button>
+
+</div>
+
+<button id="cartButton">
+
+🛒 Add to Cart
+
+</button>
+
+<button
+onclick="addWishlist()"
+style="background:#D4AF37;color:black;">
+
+❤️ Add to Wishlist
+
+</button>
+
+<hr style="margin:30px 0;">
+
+<h3>Product Information</h3>
+<hr style="margin:40px 0;">
+
+<p><b>Material:</b> Premium Thrift Clothing</p>
+
+<p><b>Condition:</b> Excellent Condition</p>
+
+<p><b>Stock:</b> <span id="stock"></span></p>
+
+<p><b>Shipping:</b> 2–5 Business Days</p>
+
+</div>
+
+</div>
+
+<script>
+
+function submitReview(){
+
+    fetch("/api/reviews",{
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+
+            productId:id,
+
+            customerName:
+                document.getElementById("reviewName").value,
+
+            comment:
+                document.getElementById("reviewComment").value,
+
+            rating:
+                document.getElementById("reviewRating").value
+
+        })
+
+    })
+
+    .then(response=>response.json())
+
+    .then(()=>{
+
+        document.getElementById("reviewName").value="";
+        document.getElementById("reviewComment").value="";
+        document.getElementById("reviewRating").value="5";
+
+        loadReviews();
+
+    });
+
+}
+
+
+    fetch("/api/reviews/"+id)
+
+    .then(response=>response.json())
+
+    .then(reviews=>{
+
+        let html="";
+
+        if(reviews.length===0){
+
+            html="<p>No reviews yet.</p>";
+
+        }
+
+        reviews.forEach(review=>{
+
+            let stars="";
+
+            for(let i=0;i<review.rating;i++){
+
+                stars+="⭐";
+
+            }
+
+            html+=`
+
+            <div style="
+            background:#fff;
+            padding:20px;
+            margin-top:20px;
+            border-radius:10px;
+            box-shadow:0 2px 10px rgba(0,0,0,.1);">
+
+                <h3>${review.customerName}</h3>
+
+                <p>${stars}</p>
+
+                <p>${review.comment}</p>
+
+            </div>
+
+            `;
+
+        });
+
+        document.getElementById("reviewList").innerHTML=html;
+
+    });
+
+
+
+let quantity = 1;
+
+fetch("/api/products/" + id)
+
+.then(response => response.json())
+
+.then(product => {
+
+    document.getElementById("image").src =
+        "/api/products/image/" + product.id;
+
+    document.getElementById("name").innerHTML =
+        product.name;
+
+    document.getElementById("price").innerHTML =
+        "₱" + product.price;
+
+    document.getElementById("category").innerHTML =
+        "<b>Category:</b> " + product.category;
+
+    document.getElementById("description").innerHTML =
+        product.description;
+
+    if(product.stock > 0){
+
+        document.getElementById("stock").innerHTML =
+            "✅ In Stock (" + product.stock + ")";
+
+        document.getElementById("cartButton").onclick = function(){
+
+            addToCart(
+                product.id,
+                product.name,
+                product.price,
+                quantity
+            );
+
+        };
+
+    }else{
+
+        document.getElementById("stock").innerHTML =
+            "❌ Out of Stock";
+
+        document.getElementById("cartButton").disabled = true;
+
+        document.getElementById("cartButton").innerHTML =
+            "Out of Stock";
+
+    }
+
+    // Load reviews and average rating AFTER product loads
+    loadReviews();
+
+});
+
+function increaseQty(){
+
+    const stockText = document.getElementById("stock").innerText;
+
+    const match = stockText.match(/\d+/);
+
+    const stock = match ? parseInt(match[0]) : 0;
+
+    if(quantity < stock){
+
+        quantity++;
+
+        document.getElementById("qty").value = quantity;
+
+    }
+
+}
+
+function decreaseQty(){
+
+    if(quantity > 1){
+
+        quantity--;
+
+        document.getElementById("qty").value = quantity;
+
+    }
+
+}
+
+document.getElementById("qty").addEventListener("change", function(){
+
+    quantity = parseInt(this.value);
+
+    if(quantity < 1){
+
+        quantity = 1;
+
+        this.value = 1;
+
+    }
+
+});
+
+function addWishlist(){
+
+    fetch("/api/auth/me",{
+
+        credentials:"include"
+
+    })
+
+    .then(response=>response.json())
+
+    .then(user=>{
+
+        if(!user.authenticated){
+
+            alert("Please login first.");
+
+            window.location.href="/login";
+
+            return;
+
+        }
+
+        fetch("/api/wishlist",{
+
+            method:"POST",
+
+            credentials:"include",
+
+            headers:{
+                "Content-Type":"application/json"
+            },
+
+            body:JSON.stringify({
+
+                productId:id
+
+            })
+
+        })
+
+        .then(response=>response.json())
+
+        .then(data=>{
+
+            alert(data.message);
+
+        });
+
+    });
+
+}
+
+
+loadAverageRating();
+
+</script>
+
+
+<script src="/js/script.js"></script>
+
+</body>
+
+</html>

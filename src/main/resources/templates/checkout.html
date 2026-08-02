@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Checkout | GodGive2Thrift</title>
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+*{
+    transition:.25s ease;
+}
+body{
+    background:#f5f5f5;
+    font-family:'Poppins',sans-serif;
+}
+
+header{
+    background:#1E293B;
+    color:white;
+    padding:20px 50px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 4px 15px rgba(0,0,0,.15);
+}
+
+header h1{
+    color:#D4AF37;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
+    font-weight:bold;
+}
+
+nav a:hover{
+    color:#D4AF37;
+}
+
+.container{
+    width:90%;
+    max-width:1300px;
+    margin:40px auto;
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:30px;
+}
+
+.form-box,
+.summary{
+
+    position:sticky;
+
+    top:100px;
+
+}
+
+.form-box h2,
+.summary h2{
+
+    margin-bottom:20px;
+
+}
+
+.form-box input,
+.form-box textarea{
+
+    width:100%;
+    padding:14px;
+    margin-bottom:15px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:15px;
+
+}
+
+.payment{
+
+    background:#fafafa;
+    border:1px solid #ddd;
+    border-radius:10px;
+    padding:20px;
+    margin-top:20px;
+
+}
+
+.payment h3{
+
+    margin-bottom:15px;
+
+}
+
+.qr{
+
+    width:220px;
+    display:block;
+    margin:20px auto;
+    border-radius:10px;
+
+}
+
+.summary-item{
+
+    display:flex;
+    justify-content:space-between;
+    margin:15px 0;
+
+}
+
+.place-btn{
+
+    width:100%;
+
+    padding:16px;
+
+    background:#1E293B;
+
+    color:white;
+
+    border:none;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-size:17px;
+
+    font-weight:600;
+
+}
+
+.place-btn:hover{
+
+    background:#F59E0B;
+
+    color:black;
+
+    transform:translateY(-3px);
+
+}
+
+.success{
+
+    display:none;
+    text-align:center;
+    background:white;
+    padding:40px;
+    margin:40px auto;
+    width:90%;
+    max-width:700px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+
+}
+
+.success i{
+
+    font-size:80px;
+    color:green;
+    margin-bottom:20px;
+
+}
+
+@media(max-width:900px){
+
+.container{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>GodGive2Thrift</h1>
+
+<nav>
+
+<a href="/">Home</a>
+<a href="/shop">Shop</a>
+<a href="/cart">Cart</a>
+
+</nav>
+
+</header>
+
+<div class="container">
+
+<div class="form-box">
+
+<h2>🚚 Shipping Information</h2>
+
+<input id="fullname" type="text" placeholder="Full Name">
+
+<input id="email" type="email" placeholder="Email">
+
+<input id="phone" type="text" placeholder="Phone Number">
+
+<textarea
+id="address"
+rows="4"
+placeholder="Complete Address"></textarea>
+
+<div class="payment">
+
+<h3>Payment Method</h3>
+
+<p><strong>GCash Only</strong></p>
+
+<img
+class="qr"
+src="/images/gcash-qr.png"
+alt="GCash QR">
+
+<p style="text-align:center;">
+Scan this QR Code before placing your order.
+</p>
+<input
+id="gcashReference"
+type="text"
+placeholder="GCash Reference Number">
+<label><strong>Upload GCash Payment Screenshot</strong></label>
+
+<input
+type="file"
+id="paymentProof"
+accept="image/*">
+
+<img
+id="proofPreview"
+style="
+width:220px;
+margin-top:15px;
+display:none;
+border-radius:10px;
+border:2px dashed #D4AF37;">
+</div>
+
+<br>
+
+<button
+class="place-btn"
+const button = document.querySelector(".place-btn");
+
+button.disabled = true;
+
+button.innerHTML =
+"Processing...";
+onclick="placeOrder()">
+
+<i class="fa-solid fa-lock"></i>
+
+Place Order
+
+</button>
+
+</div>
+
+<div class="summary">
+
+<h2>🧾 Order Summary</h2>
+
+<div id="summaryItems"></div>
+
+<hr>
+
+<div class="summary-item">
+
+<span>Subtotal</span>
+
+<strong id="subtotal">₱0</strong>
+
+</div>
+
+<div class="summary-item">
+
+<span>🚚 Shipping Fee</span>
+
+<strong>₱100</strong>
+
+</div>
+
+<hr>
+
+<div class="summary-item">
+
+<h3>💰 Total Payment</h3>
+
+<h3 id="grandTotal">₱100</h3>
+
+</div>
+
+</div>
+
+</div>
+
+<div
+class="success"
+id="successMessage">
+
+<i class="fa-solid fa-circle-check"></i>
+
+<h2>🎉 Order Placed Successfully!</h2>
+
+<p>
+
+Thank you for choosing GodGive2Thrift!
+
+</p>
+
+<p>
+
+Your order will be processed after your GCash payment has been verified.
+
+</p>
+
+<br>
+
+<a
+href="/"
+
+class="place-btn"
+
+style="display:inline-block;width:auto;padding:15px 30px;text-decoration:none;">
+
+Return Home
+
+</a>
+
+</div>
+
+<script src="/js/cart.js"></script>
+<script src="/js/auth.js"></script>
+
+<script>
+
+loadUser();
+loadSummary();
+
+function loadUser() {
+
+    fetch("/api/auth/me", {
+        credentials: "include"
+    })
+    .then(response => response.json())
+    .then(user => {
+
+        if (!user.authenticated) {
+            window.location.href = "/login";
+            return;
+        }
+
+        document.getElementById("fullname").value = user.name;
+        document.getElementById("email").value = user.email;
+
+    });
+
+}
+
+function placeOrder() {
+
+    const customerName = document.getElementById("fullname").value;
+    const email = document.getElementById("email").value;
+    const phone = document.getElementById("phone").value;
+    const address = document.getElementById("address").value;
+    const gcashReference = document.getElementById("gcashReference").value;
+    const paymentProof = document.getElementById("paymentProof").files[0];
+
+    if (
+        customerName === "" ||
+        email === "" ||
+        phone === "" ||
+        address === "" ||
+        gcashReference === ""
+    ) {
+
+        alert("Please complete all fields.");
+        return;
+
+    }
+
+    if (!paymentProof) {
+
+        alert("Please upload your GCash payment screenshot.");
+        return;
+
+    }
+
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    if (cart.length === 0) {
+
+        alert("Your cart is empty.");
+        return;
+
+    }
+
+    const requests = cart.map(item => {
+
+        const formData = new FormData();
+
+        formData.append("customerName", customerName);
+        formData.append("email", email);
+        formData.append("phone", phone);
+        formData.append("address", address);
+
+        formData.append("productName", item.name);
+        formData.append("quantity", item.quantity);
+        formData.append("total", item.price * item.quantity);
+
+        formData.append("paymentMethod", "GCash");
+        formData.append("gcashReference", gcashReference);
+        formData.append("paymentProof", paymentProof);
+
+        return fetch("/api/orders", {
+
+            method: "POST",
+            credentials: "include",
+            body: formData
+
+        })
+
+        .then(async response => {
+
+            if (!response.ok) {
+
+                const error = await response.text();
+                throw new Error(error);
+
+            }
+
+            return response.json();
+
+        });
+
+    });
+
+    Promise.all(requests)
+
+    .then(() => {
+
+        localStorage.removeItem("cart");
+
+        document.querySelector(".container").style.display = "none";
+
+        document.getElementById("successMessage").style.display = "block";
+
+    })
+
+    .catch(error => {
+
+        alert(error.message);
+
+    });
+
+}
+
+// -------------------------
+// PAYMENT PROOF PREVIEW
+// -------------------------
+
+const proof = document.getElementById("paymentProof");
+const preview = document.getElementById("proofPreview");
+
+proof.addEventListener("change", function () {
+
+    if (proof.files.length === 0) {
+
+        preview.style.display = "none";
+        return;
+
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+
+        preview.src = e.target.result;
+        preview.style.display = "block";
+
+    };
+
+    reader.readAsDataURL(proof.files[0]);
+
+});
+
+</script>
+
+</body>
+
+</html>

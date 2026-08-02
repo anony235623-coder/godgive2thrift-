@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+<meta charset="UTF-8">
+
+<title>My Wishlist</title>
+
+<style>
+*{
+    transition:.25s ease;
+}
+body{
+
+    font-family:Arial;
+    background:#f5f5f5;
+    padding:40px;
+
+}
+
+.card{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    transition:all .25s ease;
+
+}
+
+.card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 18px 35px rgba(0,0,0,.12);
+
+}
+
+button{
+
+    background:#1E293B;
+
+    color:white;
+
+    border:none;
+
+    padding:14px 22px;
+
+    border-radius:12px;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:all .25s ease;
+
+}
+
+button:hover{
+
+    background:#F59E0B;
+
+    color:black;
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 25px rgba(0,0,0,.18);
+
+}
+
+button:active{
+
+    transform:scale(.97);
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>❤️ My Wishlist</h1>
+
+<div id="wishlist"></div>
+
+<script src="/js/wishlist.js"></script>
+
+</body>
+
+</html>

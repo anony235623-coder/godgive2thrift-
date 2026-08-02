@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Account | GodGive2Thrift</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+*{
+    transition:.25s ease;
+}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f5f5f5;
+}
+
+/* HEADER */
+
+header{
+
+    background:#1E293B;
+
+    color:white;
+
+    padding:20px 40px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    box-shadow:0 4px 15px rgba(0,0,0,.15);
+
+}
+
+header h1{
+
+    color:#D4AF37;
+
+}
+
+#navbar{
+
+    display:flex;
+    align-items:center;
+    gap:20px;
+
+}
+
+#navbar a{
+
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    transition:.3s;
+
+}
+
+#navbar a:hover{
+
+    color:#D4AF37;
+
+}
+
+#accountMenu{
+
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+}
+
+/* CONTAINER */
+
+.container{
+
+    width:90%;
+    max-width:1000px;
+    margin:40px auto;
+
+}
+
+.card{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    transition:all .25s ease;
+
+}
+
+.card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 18px 35px rgba(0,0,0,.12);
+
+}
+
+/* PROFILE */
+
+.profile{
+
+    text-align:center;
+
+}
+
+.profile i{
+
+    font-size:90px;
+    color:#D4AF37;
+
+}
+
+.profile h2{
+
+    margin-top:15px;
+
+}
+
+/* INFO */
+
+.info{
+
+    margin-top:25px;
+
+}
+
+.info p{
+
+    padding:15px 0;
+    border-bottom:1px solid #eee;
+    font-size:17px;
+
+}
+
+/* STATS */
+
+.stats{
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:20px;
+    text-align:center;
+
+}
+
+.stats h1{
+
+    color:#D4AF37;
+    font-size:40px;
+
+}
+
+/* BUTTONS */
+
+.buttons{
+
+    display:flex;
+    gap:15px;
+    margin-top:30px;
+
+}
+
+button{
+
+    background:#1E293B;
+
+    color:white;
+
+    border:none;
+
+    padding:14px 22px;
+
+    border-radius:12px;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:all .25s ease;
+
+}
+
+button:hover{
+
+    background:#F59E0B;
+
+    color:black;
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 25px rgba(0,0,0,.18);
+
+}
+
+button:active{
+
+    transform:scale(.97);
+
+}
+/* EDIT BOX */
+
+#editBox{
+
+    display:none;
+    margin-top:30px;
+
+}
+
+#editBox input{
+
+    width:100%;
+    padding:12px;
+    margin-bottom:12px;
+
+}
+
+/* TABLE */
+
+table{
+
+border-collapse:separate;
+
+border-spacing:0;
+
+overflow:hidden;
+
+border-radius:15px;
+
+box-shadow:0 10px 20px rgba(0,0,0,.08);
+
+}
+
+th{
+
+    background:#111;
+    color:white;
+    padding:12px;
+
+}
+
+td{
+
+    padding:12px;
+    border-bottom:1px solid #ddd;
+    text-align:center;
+
+}
+
+@media(max-width:768px){
+
+.stats{
+
+    grid-template-columns:1fr;
+
+}
+
+.buttons{
+
+    flex-direction:column;
+
+}
+
+header{
+
+    flex-direction:column;
+    gap:15px;
+
+}
+table{
+
+    width:100%;
+
+}
+
+tr:hover{
+
+    background:#f8f8f8;
+
+}
+
+th{
+
+    background:#1E293B;
+
+}
+
+.status{
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+}
+
+.pending{
+
+    background:#fff3cd;
+
+    color:#856404;
+
+}
+
+.shipped{
+
+    background:#cce5ff;
+
+    color:#004085;
+
+}
+
+.delivered{
+
+    background:#d4edda;
+
+    color:#155724;
+
+}
+#orderModal{
+
+    backdrop-filter:blur(5px);
+
+}
+
+#orderModal > div{
+
+    animation:popup .25s ease;
+
+}
+
+@keyframes popup{
+
+from{
+
+    transform:scale(.8);
+
+    opacity:0;
+
+}
+
+to{
+
+    transform:scale(1);
+
+    opacity:1;
+
+}
+
+}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>GodGive2Thrift</h1>
+
+<nav id="navbar">
+
+<a href="/">Home</a>
+
+<a href="/shop">Shop</a>
+
+<a href="/cart">Cart</a>
+
+<a href="/account">My Account</a>
+
+<span id="accountMenu">
+
+<a href="#" onclick="logout();return false;">Logout</a>
+
+</span>
+
+</nav>
+
+</header>
+
+<div class="container">
+
+<!-- PROFILE -->
+
+<div class="card">
+
+<div class="profile">
+
+<i class="fa-solid fa-circle-user"></i>
+
+<h2 id="name">Loading...</h2>
+<p style="color:#777;margin-top:8px;">
+
+Welcome back 👋
+
+</p>
+
+</div>
+
+<div class="info">
+
+<p><strong>Email:</strong> <span id="email"></span></p>
+
+<p><strong>Role:</strong> <span id="role"></span></p>
+
+</div>
+
+<div class="buttons">
+
+<button onclick="showEdit()">
+
+✏ Edit Profile
+
+</button>
+
+<button onclick="logout()">
+
+🚪 Logout
+
+</button>
+
+</div>
+
+<div id="editBox">
+
+<h3>Edit Profile</h3>
+
+<br>
+
+<input id="editName" placeholder="Full Name">
+
+<input id="editEmail" placeholder="Email">
+
+<button onclick="saveProfile()">
+
+💾 Save Changes
+
+</button>
+
+<hr style="margin:30px 0;">
+
+<h3>Change Password</h3>
+
+<br>
+
+<input
+type="password"
+id="currentPassword"
+placeholder="Current Password">
+
+<input
+type="password"
+id="newPassword"
+placeholder="New Password">
+
+<input
+type="password"
+id="confirmPassword"
+placeholder="Confirm New Password">
+
+<button onclick="changePassword()">
+
+🔒 Change Password
+
+</button>
+
+</div>
+
+</div>
+
+<!-- STATISTICS -->
+
+<div class="card">
+
+<h2>Account Statistics</h2>
+
+<br>
+
+<div class="stats">
+
+<div>
+
+<h1 id="totalOrders">0</h1>
+
+<p>📦 Total Orders</p>
+
+</div>
+
+<div>
+
+<h1 id="totalSpent">₱0</h1>
+
+<p>💰 Total Spent</p>
+
+</div>
+
+<div>
+
+<h1 id="pendingOrders">0</h1>
+
+<p>⏳ Pending</p>
+
+</div>
+
+<div>
+
+<h1 id="completedOrders">0</h1>
+
+<p>✅ Delivered</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ORDERS -->
+
+<div class="card">
+
+<h2>My Orders</h2>
+
+<br>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Product</th>
+<th>Quantity</th>
+<th>Total</th>
+<th>Status</th>
+<th>Date</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="orderTable">
+
+</tbody>
+
+</table>
+
+<!-- Tracking Card -->
+
+<div
+id="trackingCard"
+style="
+margin-top:40px;
+display:none;
+background:white;
+padding:25px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,.15);">
+
+<h2>📦 Order Tracking</h2>
+
+<br>
+
+<p>
+
+<b>📦 Tracking Number:</b>
+
+<span id="trackingNumber"></span>
+
+</p>
+
+<br>
+
+<div id="trackingTimeline"></div>
+
+</div>
+
+</div>
+
+</div>
+<tr>
+
+<td colspan="6">
+
+<div style="padding:40px;text-align:center;">
+
+<i class="fa-solid fa-box-open"
+
+style="font-size:70px;color:#ccc;"></i>
+
+<h2>No Orders Yet</h2>
+
+<p>Start shopping to see your orders.</p>
+
+<br>
+
+<a href="/shop"
+
+style="text-decoration:none;
+background:#1E293B;
+color:white;
+padding:12px 20px;
+border-radius:10px;">
+
+Continue Shopping
+
+</a>
+
+</div>
+
+</td>
+
+</tr>
+<script src="/js/auth.js"></script>
+<script src="/js/account.js"></script>
+<div id="orderModal"
+style="
+display:none;
+position:fixed;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.5);">
+
+<div
+style="
+background:white;
+width:90%;
+max-width:700px;
+margin:80px auto;
+padding:30px;
+border-radius:12px;
+position:relative;">
+
+<span
+onclick="closeOrderModal()"
+style="
+position:absolute;
+right:20px;
+top:15px;
+cursor:pointer;
+font-size:30px;">
+
+&times;
+
+</span>
+
+<h2>Order Details</h2>
+
+<div id="orderDetails"></div>
+
+</div>
+
+</div>
+</body>
+</html>

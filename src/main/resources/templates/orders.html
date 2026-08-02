@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Order Management | GodGive2Thrift</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+*{
+    transition:.25s ease;
+}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f4f6f9;
+}
+
+header{
+
+    background:#1E293B;
+
+    color:white;
+
+    padding:20px 40px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    box-shadow:0 4px 15px rgba(0,0,0,.15);
+
+}
+
+header h1{
+color:#D4AF37;
+}
+
+header a{
+text-decoration:none;
+}
+
+.back-btn{
+
+    background:#F59E0B;
+
+    color:white;
+
+    padding:12px 20px;
+
+    border-radius:10px;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+}
+
+.back-btn:hover{
+
+    background:#d97706;
+
+}
+
+.container{
+width:95%;
+max-width:1500px;
+margin:30px auto;
+}
+
+.toolbar{
+display:flex;
+gap:15px;
+margin-bottom:25px;
+flex-wrap:wrap;
+}
+
+.toolbar input,
+.toolbar select{
+
+    padding:14px;
+
+    border-radius:10px;
+
+    border:1px solid #ddd;
+
+    font-size:15px;
+
+    background:white;
+
+}
+
+.toolbar input{
+
+flex:1;
+
+}
+
+table{
+
+    width:100%;
+
+
+
+border-collapse:separate;
+
+border-spacing:0;
+
+overflow:hidden;
+
+border-radius:15px;
+
+box-shadow:0 10px 20px rgba(0,0,0,.08);
+
+}
+
+th{
+
+background:#111;
+color:white;
+padding:15px;
+
+}
+
+td{
+
+padding:15px;
+text-align:center;
+border-bottom:1px solid #eee;
+
+}
+
+tr:hover{
+
+background:#fafafa;
+
+}
+
+button{
+
+    background:#1E293B;
+
+    color:white;
+
+    border:none;
+
+    padding:14px 22px;
+
+    border-radius:12px;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:all .25s ease;
+
+}
+
+button:hover{
+
+    background:#F59E0B;
+
+    color:black;
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 25px rgba(0,0,0,.18);
+
+}
+
+button:active{
+
+    transform:scale(.97);
+
+}
+
+.accept{
+background:#28a745;
+color:white;
+}
+
+.ship{
+background:#007bff;
+color:white;
+}
+
+.deliver{
+background:#D4AF37;
+color:black;
+}
+
+.cancel{
+background:#dc3545;
+color:white;
+}
+
+.view{
+background:#6c757d;
+color:white;
+}
+
+.print{
+background:#17a2b8;
+color:white;
+}
+
+.pending{
+background:#fff3cd;
+color:#856404;
+padding:6px 12px;
+border-radius:20px;
+font-weight:bold;
+}
+
+.verified{
+background:#d4edda;
+color:#155724;
+padding:6px 12px;
+border-radius:20px;
+font-weight:bold;
+}
+
+.shipped{
+background:#cce5ff;
+color:#004085;
+padding:6px 12px;
+border-radius:20px;
+font-weight:bold;
+}
+
+.delivered{
+background:#d1ecf1;
+color:#0c5460;
+padding:6px 12px;
+border-radius:20px;
+font-weight:bold;
+}
+
+.modal{
+
+    display:none;
+
+    position:fixed;
+
+    left:0;
+
+    top:0;
+
+    width:100%;
+
+    height:100%;
+
+    background:rgba(0,0,0,.5);
+
+    backdrop-filter:blur(5px);
+
+}
+
+.modal-content{
+
+    animation:popup .25s ease;
+
+}
+
+@keyframes popup{
+
+from{
+
+    transform:scale(.85);
+
+    opacity:0;
+
+}
+
+to{
+
+    transform:scale(1);
+
+    opacity:1;
+
+}
+
+}
+
+.close{
+
+position:absolute;
+right:20px;
+top:15px;
+font-size:25px;
+cursor:pointer;
+
+}
+
+@media(max-width:900px){
+
+table{
+font-size:13px;
+}
+
+.toolbar{
+flex-direction:column;
+}
+.rejected{
+
+    background:#f8d7da;
+
+    color:#842029;
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+    font-weight:bold;
+
+}
+.accept:hover{
+
+    background:#218838;
+
+}
+
+.ship:hover{
+
+    background:#0056b3;
+
+}
+
+.deliver:hover{
+
+    background:#c69500;
+
+}
+
+.cancel:hover{
+
+    background:#bb2d3b;
+
+}
+
+.view:hover{
+
+    background:#5a6268;
+
+}
+
+.print:hover{
+
+    background:#138496;
+
+}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>
+<i class="fa-solid fa-box"></i>
+Order Management
+</h1>
+
+<a href="/admin" class="back-btn">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+Dashboard
+
+</a>
+
+</header>
+
+<div class="container">
+
+<div class="toolbar">
+
+<input
+type="text"
+id="searchOrder"
+placeholder="🔍 Search customer or product..."
+onkeyup="filterOrders()">
+
+<select
+id="statusFilter"
+onchange="filterOrders()">
+
+<option value="">All Status</option>
+
+<option value="Pending">Pending</option>
+
+<option value="Verified">Verified</option>
+
+<option value="Shipped">Shipped</option>
+
+<option value="Delivered">Delivered</option>
+
+</select>
+
+</div>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Customer</th>
+
+<th>Product</th>
+
+<th>Quantity</th>
+
+<th>Total</th>
+
+<th>Status</th>
+
+<th>Tracking</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="orderTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+<div class="modal" id="orderModal">
+
+<div class="modal-content">
+
+<span class="close" onclick="closeModal()">&times;</span>
+
+<h2>📦 Order Details</h2>
+<div id="modalBody">
+
+</div>
+
+</div>
+
+</div>
+
+<script src="/js/orders.js"></script>
+
+</body>
+
+</html>
