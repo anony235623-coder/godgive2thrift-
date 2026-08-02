@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Shop | GodGive2Thrift</title>
+
+<link rel="stylesheet" href="/css/style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+*{
+    transition:.25s ease;
+}
+body{
+background:#f3f3f3;
+font-family:'Poppins',sans-serif;
+}
+
+header{
+background:#111;
+color:white;
+padding:20px 50px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+header h1{
+color:#D4AF37;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin-left:20px;
+font-weight:bold;
+}
+
+nav a:hover{
+color:#D4AF37;
+}
+
+.hero{
+
+background:url("https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=1600&q=80");
+
+background-size:cover;
+background-position:center;
+
+height:280px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+color:white;
+
+font-size:40px;
+
+font-weight:bold;
+
+text-shadow:0 0 10px black;
+
+}
+
+.search{
+
+width:90%;
+
+max-width:600px;
+
+margin:40px auto;
+
+}
+
+.search input{
+
+width:100%;
+
+padding:16px;
+
+border-radius:8px;
+
+border:1px solid #ccc;
+
+font-size:16px;
+
+}
+
+.products{
+
+width:90%;
+
+margin:auto;
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+gap:30px;
+
+padding-bottom:50px;
+
+}
+
+.card{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    transition:all .25s ease;
+
+}
+
+.card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 18px 35px rgba(0,0,0,.12);
+
+}
+
+.badge{
+
+position:absolute;
+
+top:15px;
+
+left:15px;
+
+background:#D4AF37;
+
+padding:8px 14px;
+
+font-size:13px;
+
+font-weight:bold;
+
+border-radius:30px;
+
+}
+
+.favorite{
+
+position:absolute;
+
+top:15px;
+
+right:15px;
+
+background:white;
+
+width:40px;
+
+height:40px;
+
+border-radius:50%;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+cursor:pointer;
+
+font-size:18px;
+
+}
+
+.favorite:hover{
+
+color:red;
+
+}
+
+.card img{
+
+width:100%;
+
+height:320px;
+
+object-fit:cover;
+
+}
+
+.content{
+
+padding:20px;
+
+}
+
+.content h3{
+
+margin-bottom:10px;
+
+}
+
+.price{
+
+font-size:26px;
+
+font-weight:bold;
+
+color:#D4AF37;
+
+}
+
+.rating{
+
+margin:10px 0;
+
+color:orange;
+
+}
+
+.stock{
+
+color:green;
+
+margin-bottom:15px;
+
+}
+
+button{
+
+    background:#1E293B;
+
+    color:white;
+
+    border:none;
+
+    padding:14px 22px;
+
+    border-radius:12px;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:all .25s ease;
+
+}
+
+button:hover{
+
+    background:#F59E0B;
+
+    color:black;
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 25px rgba(0,0,0,.18);
+
+}
+
+button:active{
+
+    transform:scale(.97);
+
+}
+
+footer{
+
+margin-top:60px;
+
+background:#111;
+
+color:white;
+
+text-align:center;
+
+padding:40px;
+
+}
+.sale-badge{
+
+position:absolute;
+
+top:15px;
+
+left:15px;
+
+background:#E63946;
+
+color:white;
+
+padding:6px 12px;
+
+border-radius:25px;
+
+font-size:12px;
+
+font-weight:bold;
+
+z-index:5;
+
+}
+
+.product-card{
+
+position:relative;
+
+overflow:hidden;
+
+transition:.35s;
+
+}
+
+.product-card:hover{
+
+transform:translateY(-10px);
+
+box-shadow:0 20px 35px rgba(0,0,0,.18);
+
+}
+
+.product-image{
+
+height:320px;
+
+object-fit:cover;
+
+transition:.35s;
+
+}
+
+.product-card:hover .product-image{
+
+transform:scale(1.08);
+
+}
+
+.old-price{
+
+color:#999;
+
+text-decoration:line-through;
+
+margin-top:5px;
+
+}
+
+.rating span{
+
+font-size:13px;
+
+color:#666;
+
+margin-left:8px;
+
+}
+/* ===========================
+   QUICK VIEW MODAL
+=========================== */
+
+.modal{
+
+display:none;
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:100%;
+
+background:rgba(0,0,0,.6);
+
+z-index:9999;
+
+}
+
+.modal-content{
+
+background:white;
+
+width:90%;
+
+max-width:650px;
+
+margin:60px auto;
+
+padding:30px;
+
+border-radius:20px;
+
+text-align:center;
+
+position:relative;
+
+}
+
+.modal-content img{
+
+width:100%;
+
+height:350px;
+
+object-fit:cover;
+
+border-radius:15px;
+
+}
+
+.close{
+
+position:absolute;
+
+top:20px;
+
+right:25px;
+
+font-size:35px;
+
+cursor:pointer;
+
+font-weight:bold;
+
+}
+
+#quickCart,
+
+#quickDetails{
+
+width:100%;
+
+margin-top:15px;
+
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+    <h1 style="color:#D4AF37;">GodGive2Thrift</h1>
+
+    <nav id="navbar">
+
+        <a href="/">Home</a>
+
+        <a href="/shop">Shop</a>
+
+        <a href="/cart">Cart</a>
+
+    </nav>
+
+</header>
+
+<section class="hero">
+
+    <div>
+
+        <h2>Premium Vintage Collection</h2>
+
+        <p>Affordable • Authentic • One of a Kind</p>
+
+    </div>
+
+</section>
+
+<div class="search-section">
+
+    <input
+        type="text"
+        id="search"
+        placeholder="🔍 Search products..."
+        onkeyup="filterProducts()">
+
+    <div class="filters">
+
+        <select id="categoryFilter" onchange="filterProducts()">
+
+            <option value="">📂 All Categories</option>
+            <option value="Jacket">Jackets</option>
+            <option value="Hoodie">Hoodies</option>
+            <option value="Shirt">Shirts</option>
+            <option value="Pants">Pants</option>
+            <option value="Shoes">Shoes</option>
+
+        </select>
+
+        <select id="sortFilter" onchange="filterProducts()">
+
+            <option value="">↕ Sort By</option>
+            <option value="low">Price Low → High</option>
+            <option value="high">Price High → Low</option>
+            <option value="az">A → Z</option>
+            <option value="za">Z → A</option>
+
+        </select>
+
+    </div>
+
+</div><div class="search-section">
+
+    <input
+        type="text"
+        id="search"
+        placeholder="🔍 Search products..."
+        onkeyup="filterProducts()">
+
+    <div class="filters">
+
+        <select id="categoryFilter" onchange="filterProducts()">
+
+            <option value="">📂 All Categories</option>
+            <option value="Jacket">Jackets</option>
+            <option value="Hoodie">Hoodies</option>
+            <option value="Shirt">Shirts</option>
+            <option value="Pants">Pants</option>
+            <option value="Shoes">Shoes</option>
+
+        </select>
+
+        <select id="sortFilter" onchange="filterProducts()">
+
+            <option value="">↕ Sort By</option>
+            <option value="low">Price Low → High</option>
+            <option value="high">Price High → Low</option>
+            <option value="az">A → Z</option>
+            <option value="za">Z → A</option>
+
+        </select>
+
+    </div>
+
+</div>
+
+<section
+    class="products"
+    id="productList">
+
+</section>
+
+<footer>
+
+<h2>GodGive2Thrift</h2>
+
+<p>Premium Thrift Clothing</p>
+
+<p>Affordable • Authentic • Vintage</p>
+
+<p>📍 Cagayan de Oro City</p>
+
+<p>© 2026 GodGive2Thrift</p>
+
+</footer>
+<script>let allProducts = [];
+
+
+loadProducts();
+
+function loadProducts() {
+
+    fetch("/api/products")
+
+    .then(response => response.json())
+
+    .then(products => {
+
+        allProducts = products;
+
+        displayProducts(products);
+
+    })
+
+    .catch(error => {
+
+        console.error(error);
+
+        alert("Failed to load products.");
+
+    });
+
+}
+
+function displayProducts(products){
+
+    let html = "";
+
+    products.forEach(product => {
+
+        html += `
+
+        <div class="card product-card">
+
+    ${product.stock <= 3 && product.stock > 0 ? `
+        <div class="sale-badge">
+            🔥 HOT
+        </div>
+    ` : ""}
+
+    <div class="badge">
+
+        ${product.category}
+
+    </div>
+
+    <div
+        class="favorite"
+        onclick="addToWishlist(${product.id})">
+
+        <i class="fa-regular fa-heart"></i>
+
+    </div>
+
+
+     <a href="/product?id=${product.id}">
+
+        <img
+
+    class="product-image"
+
+    src="/api/products/image/${product.id}"
+
+    alt="${product.name}"
+
+    loading="lazy">
+
+            </a>
+
+            <div class="content">
+
+                <h3>
+
+                    <a
+                        href="/product?id=${product.id}"
+                        style="text-decoration:none;color:black;">
+
+                        ${product.name}
+
+                    </a>
+
+                </h3>
+
+                <div class="price">
+
+₱${Number(product.price).toLocaleString()}
+
+</div>
+
+<div class="old-price">
+
+₱${Number(product.price * 1.35).toLocaleString()}
+
+</div>
+
+                <div class="rating">
+
+⭐⭐⭐⭐⭐
+
+<span>
+
+4.9 (120 Reviews)
+
+</span>
+
+</div>
+
+                <div class="stock">
+
+                    ${
+                        product.stock > 5
+                        ? "✅ In Stock (" + product.stock + ")"
+
+                        : product.stock > 0
+                        ? "⚠ Only " + product.stock + " left"
+
+                        : "❌ Out of Stock"
+                    }
+
+                </div>
+
+                <button
+    onclick="openQuickView(${product.id})">
+
+    👁 Quick View
+
+</button>
+
+<button
+    onclick="viewProduct(${product.id})">
+
+    View Details
+
+</button>
+
+                ${
+                    product.stock > 0
+
+                    ? `
+
+                    <button
+
+                        onclick="addToCart(
+
+                            ${product.id},
+
+                            '${product.name.replace(/'/g,"\\'")}',
+
+                            ${product.price}
+
+                        )">
+
+                        🛒 Add to Cart
+
+                    </button>
+
+                    `
+
+                    :
+
+                    `
+
+                    <button
+                        disabled
+                        style="background:gray;cursor:not-allowed;">
+
+                        Out of Stock
+
+                    </button>
+
+                    `
+                }
+
+            </div>
+
+        </div>
+
+        `;
+    });
+
+// ===============================
+// VIEW PRODUCT
+// ===============================
+
+function viewProduct(id){
+
+    window.location.href = "/product?id=" + id;
+
+}
+
+// ===============================
+// FILTER PRODUCTS
+// ===============================
+
+function filterProducts(){
+
+    let keyword =
+        document.getElementById("search").value.toLowerCase();
+
+    let category =
+        document.getElementById("categoryFilter").value;
+
+    let sort =
+        document.getElementById("sortFilter").value;
+
+    let filtered = allProducts.filter(product=>{
+
+        let matchName =
+            product.name.toLowerCase().includes(keyword);
+
+        let matchCategory =
+            category === "" ||
+            product.category === category;
+
+        return matchName && matchCategory;
+
+    });
+
+    if(sort==="low"){
+
+        filtered.sort((a,b)=>a.price-b.price);
+
+    }
+
+    if(sort==="high"){
+
+        filtered.sort((a,b)=>b.price-a.price);
+
+    }
+
+    if(sort==="az"){
+
+        filtered.sort((a,b)=>
+            a.name.localeCompare(b.name));
+
+    }
+
+    if(sort==="za"){
+
+        filtered.sort((a,b)=>
+            b.name.localeCompare(a.name));
+
+    }
+
+    displayProducts(filtered);
+
+}
+
+// ===============================
+// WISHLIST
+// ===============================
+
+function addToWishlist(productId){
+
+    fetch("/api/auth/me",{
+
+        credentials:"include"
+
+    })
+
+    .then(r=>r.json())
+
+    .then(user=>{
+
+        if(!user.authenticated){
+
+            alert("Please login first.");
+
+            window.location.href="/login";
+
+            return;
+
+        }
+
+        fetch("/api/wishlist",{
+
+            method:"POST",
+
+            credentials:"include",
+
+            headers:{
+
+                "Content-Type":"application/json"
+
+            },
+
+            body:JSON.stringify({
+
+                productId:productId
+
+            })
+
+        })
+
+        .then(()=>{
+
+            alert("❤️ Added to Wishlist!");
+
+        });
+
+    });
+
+}
+document.getElementById("productList").innerHTML = html;
+}
+
+
+function openQuickView(id){
+
+    fetch("/api/products/" + id)
+
+    .then(response=>response.json())
+
+    .then(product=>{
+
+        document.getElementById("quickImage").src =
+            "/api/products/image/" + product.id;
+
+        document.getElementById("quickName").innerHTML =
+            product.name;
+
+        document.getElementById("quickPrice").innerHTML =
+            "₱" + product.price;
+
+        document.getElementById("quickCategory").innerHTML =
+            "Category: " + product.category;
+
+        document.getElementById("quickStock").innerHTML =
+            "Stock: " + product.stock;
+
+        document.getElementById("quickDescription").innerHTML =
+            product.description;
+
+        document.getElementById("quickCart").onclick = function(){
+
+            addToCart(
+                product.id,
+                product.name,
+                product.price
+            );
+
+        };
+
+        document.getElementById("quickDetails").onclick = function(){
+
+            window.location.href =
+                "/product?id=" + product.id;
+
+        };
+
+        document.getElementById("quickViewModal").style.display =
+            "block";
+
+    });
+
+}
+
+function closeQuickView(){
+
+    document.getElementById("quickViewModal").style.display =
+        "none";
+
+}
+
+window.onclick = function(event){
+
+    if(event.target == document.getElementById("quickViewModal")){
+
+        closeQuickView();
+
+    }
+
+};
+<div id="quickViewModal" class="modal">
+
+    <div class="modal-content">
+
+        <span class="close" onclick="closeQuickView()">
+            &times;
+        </span>
+
+        <img id="quickImage" />
+
+        <h2 id="quickName"></h2>
+
+        <h3 id="quickPrice"></h3>
+
+        <p id="quickCategory"></p>
+
+        <p id="quickStock"></p>
+
+        <p id="quickDescription"></p>
+
+        <button id="quickCart">
+            🛒 Add to Cart
+        </button>
+
+        <button id="quickDetails">
+            👁 View Full Details
+        </button>
+
+    </div>
+
+</div>
+</script>
+<script src="/js/script.js"></script>
+<script src="/js/auth.js"></script>
+</body>
+</html>

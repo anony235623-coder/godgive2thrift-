@@ -59,23 +59,24 @@ margin-left:20px;
 .container{
 
 width:90%;
-max-width:1200px;
+
+max-width:1300px;
 
 margin:50px auto;
 
 display:grid;
 
-grid-template-columns:1fr 1fr;
+grid-template-columns:1.1fr .9fr;
 
-gap:50px;
+gap:60px;
 
 background:white;
 
-padding:40px;
+padding:45px;
 
-border-radius:15px;
+border-radius:20px;
 
-box-shadow:0 5px 20px rgba(0,0,0,.15);
+box-shadow:0 10px 35px rgba(0,0,0,.15);
 
 }
 
@@ -83,7 +84,13 @@ img{
 
 width:100%;
 
-border-radius:15px;
+height:650px;
+
+object-fit:cover;
+
+border-radius:18px;
+
+box-shadow:0 8px 25px rgba(0,0,0,.15);
 
 }
 
@@ -156,6 +163,29 @@ button:active{
     transform:scale(.97);
 
 }
+.related-card{
+
+    background:white;
+
+    padding:15px;
+
+    border-radius:15px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.12);
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.related-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 12px 30px rgba(0,0,0,.2);
+
+}
 
 </style>
 
@@ -189,6 +219,24 @@ button:active{
 
 <h1 id="name"></h1>
 
+<div
+style="
+margin-top:15px;
+font-size:20px;
+color:#F59E0B;">
+
+⭐⭐⭐⭐⭐
+
+<span
+style="
+font-size:15px;
+color:#555;">
+
+(4.9 Customer Rating)
+
+</span>
+
+</div>
 
 <div class="price" id="price"></div>
 
@@ -197,6 +245,44 @@ button:active{
 <div class="stock" id="stock"></div>
 
 <p class="description" id="description"></p>
+
+<div
+style="
+margin-top:30px;
+padding:20px;
+background:#F8F8F8;
+border-radius:12px;">
+
+<p>
+
+🚚
+<b>Shipping:</b>
+
+2–5 Business Days
+
+</p>
+
+<br>
+
+<p>
+
+🔒
+<b>Payment:</b>
+
+GCash
+
+</p>
+
+<br>
+
+<p>
+
+✔
+<b>Authentic Premium Thrift</b>
+
+</p>
+
+</div>
 
 <hr style="margin:25px 0;">
 
@@ -228,32 +314,194 @@ style="width:50px;margin:0;">
 
 </div>
 
-<button id="cartButton">
+<button
+id="cartButton"
+
+style="
+width:100%;
+margin-top:30px;
+padding:18px;
+font-size:18px;">
 
 🛒 Add to Cart
 
-</button>
-
 <button
+
 onclick="addWishlist()"
-style="background:#D4AF37;color:black;">
+
+style="
+width:100%;
+margin-top:15px;
+background:#D4AF37;
+color:black;
+padding:18px;
+font-size:18px;">
 
 ❤️ Add to Wishlist
 
 </button>
+<!-- ========================= -->
+<!-- PRODUCT HIGHLIGHTS -->
+<!-- ========================= -->
 
+<div style="
+margin-top:35px;
+padding:20px;
+background:#FFF8E6;
+border-radius:12px;
+border-left:5px solid #D4AF37;">
+
+<h3 style="margin-bottom:15px;">
+✨ Product Highlights
+</h3>
+
+<p>✔ Authentic Premium Thrift Item</p>
+
+<p>✔ Carefully Washed & Sanitized</p>
+
+<p>✔ Affordable Vintage Fashion</p>
+
+<p>✔ Quality Checked Before Shipping</p>
+
+<p>✔ Fast Shipping Nationwide</p>
+
+</div>
 <hr style="margin:30px 0;">
 
 <h3>Product Information</h3>
+
+<hr style="margin:25px 0;">
+
+<table style="width:100%;line-height:2;border-collapse:collapse;">
+
+<tr>
+    <td><b>Category</b></td>
+    <td id="infoCategory"></td>
+</tr>
+
+<tr>
+    <td><b>Material</b></td>
+    <td>Premium Thrift Clothing</td>
+</tr>
+
+<tr>
+    <td><b>Condition</b></td>
+    <td>Excellent Vintage Condition</td>
+</tr>
+
+<tr>
+    <td><b>Available Stock</b></td>
+    <td id="infoStock"></td>
+</tr>
+
+<tr>
+    <td><b>Shipping</b></td>
+    <td>2–5 Business Days</td>
+</tr>
+
+<tr>
+    <td><b>Payment</b></td>
+    <td>GCash</td>
+</tr>
+
+<tr>
+    <td><b>Return Policy</b></td>
+    <td>No Return • No Exchange</td>
+</tr>
+
+<tr>
+    <td><b>Authenticity</b></td>
+    <td>100% Original Thrift Item</td>
+</tr>
+
+</table>
+<!-- ========================= -->
+<!-- PRODUCT SPECIFICATIONS -->
+<!-- ========================= -->
+
 <hr style="margin:40px 0;">
 
-<p><b>Material:</b> Premium Thrift Clothing</p>
+<h3>📋 Product Specifications</h3>
 
-<p><b>Condition:</b> Excellent Condition</p>
+<table style="
+width:100%;
+margin-top:20px;
+border-collapse:collapse;">
 
-<p><b>Stock:</b> <span id="stock"></span></p>
+<tr>
+    <td style="padding:12px;border-bottom:1px solid #eee;">
+        <b>Brand</b>
+    </td>
+    <td style="border-bottom:1px solid #eee;">
+        GodGive2Thrift
+    </td>
+</tr>
 
-<p><b>Shipping:</b> 2–5 Business Days</p>
+<tr>
+    <td style="padding:12px;border-bottom:1px solid #eee;">
+        <b>Category</b>
+    </td>
+    <td id="specCategory" style="border-bottom:1px solid #eee;"></td>
+</tr>
+
+<tr>
+    <td style="padding:12px;border-bottom:1px solid #eee;">
+        <b>Condition</b>
+    </td>
+    <td style="border-bottom:1px solid #eee;">
+        Excellent Vintage Condition
+    </td>
+</tr>
+
+<tr>
+    <td style="padding:12px;border-bottom:1px solid #eee;">
+        <b>Material</b>
+    </td>
+    <td style="border-bottom:1px solid #eee;">
+        Premium Thrift Clothing
+    </td>
+</tr>
+
+<tr>
+    <td style="padding:12px;border-bottom:1px solid #eee;">
+        <b>Available Stock</b>
+    </td>
+    <td id="specStock" style="border-bottom:1px solid #eee;"></td>
+</tr>
+
+<tr>
+    <td style="padding:12px;border-bottom:1px solid #eee;">
+        <b>Shipping</b>
+    </td>
+    <td style="border-bottom:1px solid #eee;">
+        2–5 Business Days
+    </td>
+</tr>
+
+<tr>
+    <td style="padding:12px;border-bottom:1px solid #eee;">
+        <b>Payment</b>
+    </td>
+    <td style="border-bottom:1px solid #eee;">
+        GCash
+    </td>
+</tr>
+
+<tr>
+    <td style="padding:12px;">
+        <b>Return Policy</b>
+    </td>
+    <td>
+        No Return • No Exchange
+    </td>
+</tr>
+
+</table>
+<hr style="margin:30px 0;">
+
+<h3>Description</h3>
+
+<p id="fullDescription" style="margin-top:15px;line-height:1.8;color:#555;"></p>
 
 </div>
 
@@ -358,6 +606,7 @@ let quantity = 1;
 
 fetch("/api/products/" + id)
 
+
 .then(response => response.json())
 
 .then(product => {
@@ -376,6 +625,19 @@ fetch("/api/products/" + id)
 
     document.getElementById("description").innerHTML =
         product.description;
+        document.getElementById("specCategory").innerHTML =
+    product.category;
+
+document.getElementById("specStock").innerHTML =
+    product.stock + " item(s) available";
+    document.getElementById("infoCategory").innerHTML =
+    product.category;
+
+document.getElementById("infoStock").innerHTML =
+    product.stock + " piece(s) available";
+
+document.getElementById("fullDescription").innerHTML =
+    product.description;
 
     if(product.stock > 0){
 
@@ -508,9 +770,176 @@ function addWishlist(){
 
 
 loadAverageRating();
+loadRelatedProducts();
+
+function loadRelatedProducts(){
+
+    fetch("/api/products")
+
+    .then(response=>response.json())
+
+    .then(products=>{
+
+        let html="";
+
+        products.forEach(product=>{
+
+            if(product.id == id){
+
+                return;
+
+            }
+
+            html += `
+
+            <div class="related-card"
+
+            onclick="location.href='/product?id=${product.id}'">
+
+                <img
+                src="/api/products/image/${product.id}"
+
+                style="
+                width:100%;
+                height:250px;
+                object-fit:cover;
+                border-radius:12px;">
+
+                <h3 style="margin-top:15px;">
+
+                    ${product.name}
+
+                </h3>
+
+                <p style="
+                color:#D4AF37;
+                font-size:24px;
+                font-weight:bold;">
+
+                    ₱${product.price}
+
+                </p>
+
+            </div>
+
+            `;
+
+        });
+
+        document.getElementById("relatedProducts").innerHTML = html;
+
+    });
+
+}
 
 </script>
+<!-- Reviews -->
+ <!-- ========================= -->
+<!-- CUSTOMER REVIEWS -->
+<!-- ========================= -->
 
+<hr style="margin:60px 0;">
+
+<h2 style="margin-bottom:25px;">
+⭐ Customer Reviews
+</h2>
+
+<div id="reviewList">
+
+Loading reviews...
+
+</div>
+<!-- ========================= -->
+<!-- RELATED PRODUCTS -->
+<!-- ========================= -->
+
+<hr style="margin:60px 0;">
+
+<h2 style="margin-bottom:30px;">
+🛍️ You May Also Like
+</h2>
+
+<div id="relatedProducts"
+
+style="
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+gap:25px;">
+
+</div>
+
+<hr style="margin:50px 0;">
+
+<h2>
+Write a Review
+</h2>
+
+<div style="margin-top:25px;">
+
+<label>Your Name</label>
+
+<input
+id="reviewName"
+type="text"
+
+style="
+width:100%;
+padding:12px;
+margin-top:8px;
+margin-bottom:20px;
+border-radius:8px;
+border:1px solid #ddd;">
+
+<label>Rating</label>
+
+<select
+id="reviewRating"
+
+style="
+width:100%;
+padding:12px;
+margin-top:8px;
+margin-bottom:20px;
+border-radius:8px;
+border:1px solid #ddd;">
+
+<option value="5">⭐⭐⭐⭐⭐</option>
+
+<option value="4">⭐⭐⭐⭐</option>
+
+<option value="3">⭐⭐⭐</option>
+
+<option value="2">⭐⭐</option>
+
+<option value="1">⭐</option>
+
+</select>
+
+<label>Comment</label>
+
+<textarea
+
+id="reviewComment"
+
+rows="5"
+
+style="
+width:100%;
+padding:12px;
+margin-top:8px;
+border-radius:8px;
+border:1px solid #ddd;
+resize:none;"></textarea>
+
+<br><br>
+
+<button onclick="submitReview()">
+
+Submit Review
+
+</button>
+
+</div>
 
 <script src="/js/script.js"></script>
 

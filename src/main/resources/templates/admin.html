@@ -1,168 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
+
+<title>GodGive2Thrift Admin</title>
+
 <link rel="stylesheet" href="/css/admin.css">
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
 <body>
-<header>
-<div class="card">
-<h2 id="today"></h2>
-</div>
 
-<div class="card">
-<h2>👋Welcome Admin</h2>
-<p id="lastLogin"></p>
-</div>
+<div class="layout">
 
-<h1>
+<!-- Sidebar -->
+
+<aside class="sidebar">
+
+<h2>
+
 <i class="fa-solid fa-store"></i>
-GodGive2Thrift Admin
-</h1>
 
-<div>
+GodGive2Thrift
 
-<a href="/orders">
-<button><i class="fa-solid fa-box"></i> Orders</button>
+</h2>
+
+<a href="#dashboard">
+
+<i class="fa-solid fa-gauge"></i>
+
+Dashboard
+
 </a>
 
-<a href="/reports">
-<button><i class="fa-solid fa-chart-line"></i> Reports</button>
+<a href="#products">
+
+<i class="fa-solid fa-shirt"></i>
+
+Products
+
+</a>
+
+<a href="#orders">
+
+<i class="fa-solid fa-box"></i>
+
+Orders
+
+</a>
+
+<a href="#analytics">
+
+<i class="fa-solid fa-chart-line"></i>
+
+Analytics
+
 </a>
 
 <a href="/">
-<button><i class="fa-solid fa-house"></i> Website</button>
+
+<i class="fa-solid fa-house"></i>
+
+Website
+
 </a>
 
-</div>
+<a href="#"
+
+onclick="logout();return false;">
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+Logout
+
+</a>
+
+</aside>
+
+<!-- Main -->
+
+<main class="main">
+
+<header>
+
+<h1>
+
+Admin Dashboard
+
+</h1>
+
+<p id="welcome">
+
+Loading...
+
+</p>
 
 </header>
 
-<div class="container">
-
-<!-- ================= DASHBOARD CARDS ================= -->
-
-<div class="cards">
-
-<div class="card">
-<h2>Total Products</h2>
-<h1 id="totalProducts">0</h1>
-</div>
-
-<div class="card">
-<h2>Total Orders</h2>
-<h1 id="totalOrders">0</h1>
-</div>
-<div class="card">
-<h2>Revenue</h2>
-<h1 id="revenue">₱0</h1>
-</div>
-
-<div class="card">
-<h2>Total Customers</h2>
-<h1 id="totalCustomers">0</h1>
-</div>
-
-<div class="card">
-<h2>Pending Orders</h2>
-<h1 id="pendingOrders">0</h1>
-</div>
-
-</div>
-
-<!-- ================= MONTHLY CHART ================= -->
-
-<div class="card" style="margin-top:40px;">
-
-<h2>📈 Monthly Revenue</h2>
-
-<canvas id="monthlyChart" height="100"></canvas>
-
-</div>
-
-<!-- ================= DAILY CHART ================= -->
-
-<div class="card" style="margin-top:40px;">
-
-<h2>📅 Daily Sales</h2>
-
-<canvas id="dailyChart" height="100"></canvas>
-
-</div>
-
-<!-- ================= ANALYTICS ================= -->
-
-<h2 style="margin-top:40px;">📈 Analytics</h2>
-
-<div class="cards">
+<section class="cards">
 
 <div class="card">
 
-<h2>🏆 Best Selling Product</h2>
+<h3>Products</h3>
 
-<h1 id="bestProduct">Loading...</h1>
+<h1 id="totalProducts">
+
+0
+
+</h1>
 
 </div>
 
 <div class="card">
 
-<h2>🛍 Most Recent Customer</h2>
+<h3>Orders</h3>
 
-<h1 id="recentCustomer">Loading...</h1>
+<h1 id="totalOrders">
+
+0
+
+</h1>
 
 </div>
 
 <div class="card">
 
-<h2>💰 Average Order Value</h2>
+<h3>Customers</h3>
 
-<h1 id="averageOrder">₱0</h1>
+<h1 id="totalCustomers">
+
+0
+
+</h1>
 
 </div>
 
+<div class="card">
+
+<h3>Revenue</h3>
+
+<h1 id="revenue">
+
+₱0
+
+</h1>
+
 </div>
 
-<!-- ================= NOTIFICATIONS ================= -->
+</section>
 
-<div class="card" style="margin-top:40px;">
+<section class="chart-box">
 
-<h2>🔔 Notifications</h2>
+<h2>
 
-<div id="notificationList">
+Monthly Revenue
+
+</h2>
+
+<canvas id="monthlyChart">
+
+</canvas>
+
+</section>
+
+<section id="products">
+
+<div class="section-header">
+
+<h2>Products</h2>
+
+<button class="add-btn" onclick="openProductModal()">
+
+<i class="fa-solid fa-plus"></i>
+
+Add Product
+
+</button>
+
+</div>
+
+<div id="productTable">
 
 Loading...
 
 </div>
 
+</section>
+
+</main>
+
 </div>
+<div id="productModal" class="modal">
 
-<!-- ================= PRODUCT FORM ================= -->
+<div class="modal-content">
 
-<div class="form-box">
+<span class="close" onclick="closeProductModal()">
 
-<h2 id="formTitle">Add Product</h2>
+&times;
 
-<input type="hidden" id="productId">
+</span>
 
+<h2 id="modalTitle">
 <input
-type="text"
-id="name"
-placeholder="Product Name">
+type="hidden"
+id="productId">
+Add Product
 
-<input
-type="number"
-id="price"
-placeholder="Price">
+</h2>
+
+<input id="name" placeholder="Product Name">
+
+<input id="price" type="number" placeholder="Price">
+
+<select id="category">
+
+    <option value="">Select Category</option>
+
+    <option>Jacket</option>
+
+    <option>Hoodie</option>
+
+    <option>Shirt</option>
+
+    <option>Pants</option>
+
+    <option>Shoes</option>
+
+    <option>Accessories</option>
+
+</select>
+
+<input id="stock" type="number" placeholder="Stock">
 
 <textarea
 id="description"
-placeholder="Product Description"
-style="width:100%;padding:14px;margin:10px 0;border:1px solid #ccc;border-radius:8px;height:100px;resize:none;"></textarea>
-
-<input
-type="text"
-id="category"
-placeholder="Category">
+placeholder="Description"></textarea>
 
 <input
 type="file"
@@ -173,204 +255,20 @@ accept="image/*">
 id="preview"
 class="preview">
 
-<input
-type="number"
-id="stock"
-placeholder="Stock">
+<button
+id="saveButton"
+class="save-btn"
+onclick="saveProduct()">
 
-<br><br>
-
-<button id="saveButton" onclick="saveProduct()">
-
-<i class="fa-solid fa-floppy-disk"></i>
-
-Add Product
+💾 Save Product
 
 </button>
 
 </div>
 
-<!-- ================= SEARCH ================= -->
-
-<div class="search">
-
-<input
-type="text"
-id="searchProduct"
-placeholder="Search product..."
-onkeyup="searchTable()">
-
 </div>
-
-<!-- ================= PRODUCTS ================= -->
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>Image</th>
-<th>Name</th>
-<th>Price</th>
-<th>Stock</th>
-<th>Action</th>
-
-</tr>
-
-</thead>
-
-<tbody id="productTable"></tbody>
-
-</table>
-
-<!-- ================= RECENT ORDERS ================= -->
-
-<h2 style="margin-top:40px;">
-
-Recent Orders
-
-</h2>
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>Customer</th>
-<th>Total</th>
-<th>Status</th>
-
-</tr>
-
-</thead>
-
-<tbody id="recentOrders"></tbody>
-
-</table>
-
-<!-- ================= LOW STOCK / TOP SELLING ================= -->
-
-<div class="cards" style="margin-top:40px;">
-
-<div class="card">
-
-<h2>⚠ Low Stock</h2>
-
-<div id="lowStockList">
-
-Loading...
-
-</div>
-
-</div>
-
-<div class="card">
-
-<h2>🏆 Top Selling Products</h2>
-
-<div id="topSelling">
-
-Loading...
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="/js/admin.js"></script>
 
-<script>
-
-// =========================
-// ADMIN LOGIN
-// =========================
-
-fetch("/api/auth/me",{
-credentials:"include"
-})
-.then(r=>r.json())
-.then(user=>{
-
-if(!user.authenticated){
-
-window.location.href="/login";
-return;
-
-}
-
-if(user.role!=="ADMIN"){
-
-alert("Access Denied!");
-window.location.href="/";
-return;
-
-}
-
-loadDashboard();
-loadProducts();
-loadRecentOrders();
-loadLowStock();
-loadMonthlyAnalytics();
-loadDailyAnalytics();
-
-});
-
-// =========================
-// IMAGE PREVIEW
-// =========================
-
-const file=document.getElementById("imageFile");
-const preview=document.getElementById("preview");
-
-file.addEventListener("change",function(){
-
-if(file.files.length===0){
-
-preview.style.display="none";
-return;
-
-}
-
-const reader=new FileReader();
-
-reader.onload=function(e){
-
-preview.src=e.target.result;
-preview.style.display="block";
-
-};
-
-reader.readAsDataURL(file.files[0]);
-
-});
-
-// =========================
-// SEARCH
-// =========================
-
-function searchTable(){
-
-let input=document.getElementById("searchProduct").value.toLowerCase();
-
-let rows=document.querySelectorAll("#productTable tr");
-
-rows.forEach(row=>{
-
-row.style.display=
-row.innerText.toLowerCase().includes(input)
-? ""
-: "none";
-
-});
-
-}
-
-</script>
-
 </body>
+
+</html>

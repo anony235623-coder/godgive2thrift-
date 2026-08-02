@@ -77,63 +77,20 @@ fetch("/api/auth/me", {
 
     accountMenu.innerHTML = html;
 
-})
+});
 
-.then(response => response.json())
-
-.then(user => {
-
-    const accountMenu = document.getElementById("accountMenu");
-
-    if (!accountMenu) return;
-
-    if (!user.authenticated) {
-
-        accountMenu.innerHTML = `
-            <a href="/login">Login</a>
-            <a href="/register">Register</a>
-        `;
-
-        return;
-
-    }
-
-    let html = `
-        <span style="color:#D4AF37;font-weight:bold;">
-            👤 ${user.name}
-        </span>
-
-        <a href="/account">My Account</a>
-    `;
-
-    if (user.role === "ADMIN") {
-
-        html += `
-            <a href="/admin">Admin</a>
-        `;
-
-    }
-
-    html += `
-        <a href="#" onclick="logout();return false;">
-            Logout
-        </a>
-    `;
-
-    accountMenu.innerHTML = html;
-
-}); // <-- THIS WAS MISSING
-function loadBestSellers(){
+// <-- THIS WAS MISSING
+function loadBestSellers() {
 
     fetch("/api/products/best-sellers")
 
-    .then(response=>response.json())
+    .then(response => response.json())
 
-    .then(products=>{
+    .then(products => {
 
-        let html="";
+        let html = "";
 
-        products.forEach(product=>{
+        products.forEach(product => {
 
             html += `
                 <div class="card">
@@ -159,10 +116,20 @@ function loadBestSellers(){
 
         });
 
-        document.getElementById("bestSellerProducts").innerHTML = html;
+        const bestSellerProducts = document.getElementById("bestSellerProducts");
+
+        if (bestSellerProducts) {
+
+            bestSellerProducts.innerHTML = html;
+
+        }
 
     });
 
 }
 
-loadBestSellers();
+if (document.getElementById("bestSellerProducts")) {
+
+    loadBestSellers();
+
+}

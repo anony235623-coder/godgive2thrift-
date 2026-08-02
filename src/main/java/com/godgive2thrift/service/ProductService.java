@@ -1,10 +1,11 @@
 package com.godgive2thrift.service;
+
 import com.godgive2thrift.dto.BestSellerDTO;
 import com.godgive2thrift.dto.LowStockDTO;
 import com.godgive2thrift.entity.Product;
 import com.godgive2thrift.repository.ProductRepository;
-import org.springframework.stereotype.Service;
 
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +19,17 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
+    // ==========================
+    // CREATE
+    // ==========================
+
     public Product addProduct(Product product) {
         return productRepository.save(product);
     }
+
+    // ==========================
+    // READ
+    // ==========================
 
     public List<Product> getAllProducts() {
         return productRepository.findAll();
@@ -30,60 +39,81 @@ public class ProductService {
         return productRepository.findById(id).orElse(null);
     }
 
+    // ==========================
+    // UPDATE
+    // ==========================
+
     public Product updateProduct(Product product) {
         return productRepository.save(product);
     }
+
+    // ==========================
+    // DELETE
+    // ==========================
 
     public void deleteProduct(Long id) {
         productRepository.deleteById(id);
     }
 
+    // ==========================
+    // LOW STOCK
+    // ==========================
+
     public List<LowStockDTO> getLowStockProducts() {
 
-        List<Product> products = productRepository.findByStockLessThanEqual(3);
+        List<Product> products =
+                productRepository.findByStockLessThanEqual(3);
 
-        List<LowStockDTO> lowStock = new ArrayList<>();
+        List<LowStockDTO> result = new ArrayList<>();
 
         for (Product product : products) {
 
-            lowStock.add(
-                new LowStockDTO(
-                        product.getName(),
-                        product.getCategory(),
-                        product.getStock()
-                )
+            result.add(
+
+                    new LowStockDTO(
+
+                            product.getName(),
+                            product.getCategory(),
+                            product.getStock()
+
+                    )
+
             );
 
         }
 
-        return lowStock;
+        return result;
 
     }
 
     // ==========================
-    // BEST SELLING PRODUCTS
+    // BEST SELLERS
     // ==========================
 
     public List<BestSellerDTO> getBestSellingProducts() {
 
-    List<Product> products =
-            productRepository.findTop5ByOrderBySoldDesc();
+        List<Product> products =
+                productRepository.findTop5ByOrderBySoldDesc();
 
-    List<BestSellerDTO> bestSellers = new ArrayList<>();
+        List<BestSellerDTO> result = new ArrayList<>();
 
-    for(Product product : products){
+        for (Product product : products) {
 
-        bestSellers.add(
-                new BestSellerDTO(
-                        product.getName(),
-                        product.getSold()
-                )
-        );
+            result.add(
+
+                    new BestSellerDTO(
+
+                            product.getName(),
+                            product.getSold()
+
+                    )
+
+            );
+
+        }
+
+        return result;
 
     }
-
-    return bestSellers;
-
-}
 
 }

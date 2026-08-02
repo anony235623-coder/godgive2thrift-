@@ -6,9 +6,17 @@ import jakarta.persistence.*;
 @Table(name = "products")
 public class Product {
 
+    // ==========================
+    // PRIMARY KEY
+    // ==========================
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    // ==========================
+    // PRODUCT INFORMATION
+    // ==========================
 
     @Column(nullable = false)
     private String name;
@@ -21,27 +29,49 @@ public class Product {
 
     private String category;
 
+    // ==========================
+    // PRODUCT IMAGE
+    // ==========================
+
     @Lob
     @Column(columnDefinition = "LONGBLOB")
     private byte[] image;
 
+    // ==========================
+    // INVENTORY
+    // ==========================
+
     private int stock;
 
-    // NEW FIELD
     private int sold = 0;
+
+    // ==========================
+    // CONSTRUCTORS
+    // ==========================
 
     public Product() {
     }
 
-    public Product(String name, double price, String description,
-                   String category, byte[] image, int stock) {
+    public Product(
+            String name,
+            double price,
+            String description,
+            String category,
+            byte[] image,
+            int stock
+    ) {
         this.name = name;
         this.price = price;
         this.description = description;
         this.category = category;
         this.image = image;
         this.stock = stock;
+        this.sold = 0;
     }
+
+    // ==========================
+    // GETTERS & SETTERS
+    // ==========================
 
     public Long getId() {
         return id;
@@ -99,8 +129,6 @@ public class Product {
         this.stock = stock;
     }
 
-    // NEW METHODS
-
     public int getSold() {
         return sold;
     }
@@ -108,4 +136,5 @@ public class Product {
     public void setSold(int sold) {
         this.sold = sold;
     }
+
 }

@@ -1,415 +1,383 @@
-/* ===========================
-   GODGIVE2THRIFT ADMIN PANEL
-=========================== */
-
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
+
+margin:0;
+
+padding:0;
+
+box-sizing:border-box;
+
+font-family:Poppins,sans-serif;
+
 }
 
 body{
-    background:#f5f7fa;
-    color:#333;
-}
 
-/* ===========================
-   HEADER
-=========================== */
-button,
-.card,
-input,
-textarea,
-table tr{
-
-    transition:.25s ease;
+background:#f5f6fa;
 
 }
-header{
-    background:#2c3e50;
-    color:white;
-    padding:20px 40px;
 
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+.layout{
 
-    box-shadow:0 2px 10px rgba(0,0,0,.2);
+display:flex;
+
 }
 
-header h1{
-    font-size:28px;
+.sidebar{
+
+width:260px;
+
+height:100vh;
+
+background:#111827;
+
+position:fixed;
+
+padding:30px;
+
+display:flex;
+
+flex-direction:column;
+
 }
 
-header button{
-    padding:10px 18px;
-    border:none;
-    border-radius:8px;
-    background:#3498db;
-    color:white;
-    cursor:pointer;
-    margin-left:10px;
-    transition:.3s;
+.sidebar h2{
+
+color:#D4AF37;
+
+margin-bottom:40px;
+
 }
 
-header button:hover{
-    background:#2980b9;
+.sidebar a{
+
+color:white;
+
+text-decoration:none;
+
+padding:15px;
+
+margin-bottom:10px;
+
+border-radius:10px;
+
+transition:.25s;
+
 }
 
-/* ===========================
-   CONTAINER
-=========================== */
+.sidebar a:hover{
 
-.container{
-    width:95%;
-    margin:30px auto;
+background:#D4AF37;
+
+color:black;
+
 }
 
-/* ===========================
-   DASHBOARD CARDS
-=========================== */
+.main{
+
+margin-left:260px;
+
+padding:40px;
+
+width:100%;
+
+}
 
 .cards{
 
-    display:grid;
+display:grid;
 
-    grid-template-columns:
-    repeat(auto-fit,minmax(220px,1fr));
+grid-template-columns:repeat(4,1fr);
 
-    gap:20px;
+gap:25px;
 
-    margin-bottom:30px;
+margin-top:30px;
 
 }
 
 .card{
 
-    background:white;
+background:white;
 
-    border-radius:18px;
-
-    padding:25px;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-
-    transition:all .25s ease;
-
-}
-
-.card:hover{
-
-    transform:translateY(-6px);
-
-    box-shadow:0 18px 35px rgba(0,0,0,.12);
-
-}
-
-.card h2{
-
-    color:#777;
-
-    font-size:18px;
-
-    margin-bottom:15px;
-
-}
-
-.card h1{
-
-    color:#2c3e50;
-
-    font-size:34px;
-
-}
-
-/* ===========================
-   FORM
-=========================== */
-
-.form-box{
-
-    background:white;
-
-    padding:25px;
-
-    border-radius:12px;
-
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
-
-    margin-bottom:30px;
-
-}
-
-.form-box h2{
-
-    margin-bottom:20px;
-
-}
-
-.form-box input,
-.form-box textarea{
-
-    width:100%;
-
-    padding:12px;
-
-    margin:10px 0;
-
-    border:1px solid #ddd;
-
-    border-radius:8px;
-
-}
-
-.form-box button{
-
-    background:#27ae60;
-
-    color:white;
-
-    border:none;
-
-    padding:14px 20px;
-
-    border-radius:8px;
-
-    cursor:pointer;
-
-    font-size:16px;
-
-}
-
-.form-box button:hover{
-
-    background:#219150;
-
-}
-
-/* ===========================
-   IMAGE PREVIEW
-=========================== */
-
-.preview{
-
-    width:140px;
-
-    border-radius:10px;
-
-    display:none;
-
-    margin-top:15px;
-
-}
-
-/* ===========================
-   SEARCH
-=========================== */
-
-.search{
-
-    margin:25px 0;
-
-}
-
-.search input{
-
-    width:100%;
-
-    padding:12px;
-
-    border-radius:8px;
-
-    border:1px solid #ccc;
-
-}
-
-/* ===========================
-   TABLE
-=========================== */
-
-table{
-
-border-collapse:separate;
-
-border-spacing:0;
-
-overflow:hidden;
+padding:25px;
 
 border-radius:15px;
 
-box-shadow:0 10px 20px rgba(0,0,0,.08);
+box-shadow:0 10px 25px rgba(0,0,0,.08);
 
 }
 
-table th{
+.chart-box{
 
-    background:#34495e;
+background:white;
 
-    color:white;
+padding:30px;
 
-    padding:15px;
+margin-top:40px;
+
+border-radius:15px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+/* ======================
+   PRODUCT TABLE
+====================== */
+
+.product-table{
+
+width:100%;
+
+border-collapse:collapse;
+
+margin-top:20px;
+
+background:white;
+
+border-radius:15px;
+
+overflow:hidden;
 
 }
 
-table td{
+.product-table th{
 
-    padding:15px;
+background:#111827;
 
-    border-bottom:1px solid #eee;
+color:white;
 
-    text-align:center;
+padding:15px;
 
-}
-
-table tr:hover{
-
-    background:#f8f8f8;
+text-align:left;
 
 }
 
-table img{
+.product-table td{
 
-    width:70px;
+padding:15px;
 
-    border-radius:10px;
-
-}
-
-/* ===========================
-   TABLE BUTTONS
-=========================== */
-
-table button{
-
-    padding:8px 14px;
-
-    border:none;
-
-    border-radius:6px;
-
-    cursor:pointer;
-
-    color:white;
-
-    margin:2px;
+border-bottom:1px solid #eee;
 
 }
 
-table button:first-child{
+.product-table tr:hover{
 
-    background:#f39c12;
-
-}
-
-table button:last-child{
-
-    background:#e74c3c;
+background:#f8f8f8;
 
 }
 
-/* ===========================
-   NOTIFICATIONS
-=========================== */
+.product-image{
 
-#notificationList div{
+width:70px;
 
-    padding:12px;
+height:70px;
 
-    border-bottom:1px solid #eee;
+object-fit:cover;
 
-}
-
-#notificationList div:last-child{
-
-    border:none;
+border-radius:10px;
 
 }
 
-/* ===========================
-   LOW STOCK
-=========================== */
+.edit-btn{
 
-#lowStockList div{
+background:#3B82F6;
 
-    padding:10px;
+color:white;
 
-    margin:8px 0;
+border:none;
 
-    background:#fff3cd;
+padding:10px;
 
-    border-left:5px solid orange;
+border-radius:8px;
 
-    border-radius:6px;
+cursor:pointer;
 
-}
-
-/* ===========================
-   TOP SELLING
-=========================== */
-
-#topSelling div{
-
-    padding:10px;
-
-    margin:8px 0;
-
-    background:#ecf9ec;
-
-    border-left:5px solid green;
-
-    border-radius:6px;
+margin-right:8px;
 
 }
 
-/* ===========================
-   CHARTS
-=========================== */
+.delete-btn{
 
-canvas{
+background:#EF4444;
 
-    width:100%!important;
+color:white;
 
-    height:350px!important;
+border:none;
 
-}
+padding:10px;
 
-/* ===========================
-   RESPONSIVE
-=========================== */
+border-radius:8px;
 
-@media(max-width:768px){
-
-header{
-
-    flex-direction:column;
-
-    gap:15px;
+cursor:pointer;
 
 }
 
-header div{
+.edit-btn:hover{
 
-    display:flex;
-
-    flex-wrap:wrap;
-
-    justify-content:center;
+background:#2563EB;
 
 }
 
-.cards{
+.delete-btn:hover{
 
-    grid-template-columns:1fr;
+background:#DC2626;
+
+}
+.section-header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:20px;
 
 }
 
-table{
+.add-btn{
 
-    display:block;
+background:#16A34A;
 
-    overflow-x:auto;
+color:white;
+
+border:none;
+
+padding:12px 18px;
+
+border-radius:10px;
+
+cursor:pointer;
+
+font-size:16px;
 
 }
+
+.add-btn:hover{
+
+background:#15803D;
+
+}
+
+.modal{
+
+display:none;
+
+position:fixed;
+
+left:0;
+
+top:0;
+
+width:100%;
+
+height:100%;
+
+background:rgba(0,0,0,.55);
+
+z-index:9999;
+
+}
+
+.modal-content{
+
+background:white;
+
+width:90%;
+
+max-width:600px;
+
+margin:60px auto;
+
+padding:30px;
+
+border-radius:16px;
+
+position:relative;
+
+}
+
+.modal-content input,
+
+.modal-content textarea{
+
+width:100%;
+
+padding:12px;
+
+margin-top:12px;
+
+border:1px solid #ccc;
+
+border-radius:8px;
+
+font-size:15px;
+
+}
+
+.modal-content textarea{
+
+height:120px;
+
+resize:vertical;
+
+}
+
+.close{
+
+position:absolute;
+
+right:20px;
+
+top:15px;
+
+font-size:28px;
+
+cursor:pointer;
+
+}
+
+.preview{
+
+display:none;
+
+width:220px;
+
+height:220px;
+
+margin:20px auto;
+
+object-fit:cover;
+
+border-radius:15px;
+
+border:2px dashed #D4AF37;
+
+}
+
+.save-btn{
+
+margin-top:20px;
+
+width:100%;
+
+background:#2563EB;
+
+color:white;
+
+border:none;
+
+padding:14px;
+
+border-radius:10px;
+
+cursor:pointer;
+
+font-size:16px;
+
+}
+
+.save-btn:hover{
+
+background:#1D4ED8;
 
 }
