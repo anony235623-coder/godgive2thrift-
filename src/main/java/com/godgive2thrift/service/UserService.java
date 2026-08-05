@@ -4,6 +4,7 @@ import com.godgive2thrift.entity.User;
 import com.godgive2thrift.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -66,4 +67,33 @@ public class UserService {
 
         return true;
     }
+    // ==========================
+// GET ALL USERS
+// ==========================
+
+public List<User> getAllUsers() {
+
+    return userRepository.findAll();
+
+}
+
+// ==========================
+// TOTAL USERS
+// ==========================
+
+public long getTotalUsers() {
+
+    return userRepository.count();
+
+}
+
+// ==========================
+// SEARCH USERS
+// ==========================
+
+public List<User> searchUsers(String keyword) {
+
+    return userRepository.findByNameContainingIgnoreCase(keyword);
+
+}
 }

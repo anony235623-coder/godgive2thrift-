@@ -23,14 +23,16 @@ public class Order {
     private String paymentMethod;
     private String gcashReference;
 
-    // NEW
-    private String paymentProof;
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] paymentProof;
 
     private String trackingNumber;
 
-    private String status;
+    @Column(nullable = false)
+    private String status = "PENDING";
 
-    private LocalDateTime orderDate;
+    private LocalDateTime orderDate = LocalDateTime.now();
 
     private LocalDateTime deliveredDate;
 
@@ -113,12 +115,11 @@ public class Order {
         this.gcashReference = gcashReference;
     }
 
-    // NEW
-    public String getPaymentProof() {
+    public byte[] getPaymentProof() {
         return paymentProof;
     }
 
-    public void setPaymentProof(String paymentProof) {
+    public void setPaymentProof(byte[] paymentProof) {
         this.paymentProof = paymentProof;
     }
 
@@ -145,11 +146,25 @@ public class Order {
     public void setOrderDate(LocalDateTime orderDate) {
         this.orderDate = orderDate;
     }
-    public LocalDateTime getDeliveredDate() {
-    return deliveredDate;
-}
 
-public void setDeliveredDate(LocalDateTime deliveredDate) {
-    this.deliveredDate = deliveredDate;
-}
+    public LocalDateTime getDeliveredDate() {
+        return deliveredDate;
+    }
+
+    public void setDeliveredDate(LocalDateTime deliveredDate) {
+        this.deliveredDate = deliveredDate;
+    }
+
+    @PrePersist
+    public void prePersist() {
+
+        if (status == null || status.isBlank()) {
+            status = "PENDING";
+        }
+
+        if (orderDate == null) {
+            orderDate = LocalDateTime.now();
+        }
+
+    }
 }

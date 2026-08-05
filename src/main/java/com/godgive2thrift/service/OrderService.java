@@ -23,32 +23,47 @@ public class OrderService {
 
     }
 
-  public Order saveOrder(Order order) {
+    // ==========================
+    // SAVE ORDER
+    // ==========================
 
-    Product product = productRepository.findByName(order.getProductName());
+    public Order saveOrder(Order order) {
 
-    if (product == null) {
-        throw new RuntimeException("Product not found.");
+        Product product = productRepository.findByName(order.getProductName());
+
+        if (product == null) {
+            throw new RuntimeException("Product not found.");
+        }
+
+        if (order.getQuantity() <= 0) {
+            throw new RuntimeException("Invalid quantity.");
+        }
+
+        if (product.getStock() < order.getQuantity()) {
+            throw new RuntimeException("Not enough stock available.");
+        }
+
+        product.setStock(product.getStock() - order.getQuantity());
+        product.setSold(product.getSold() + order.getQuantity());
+
+        productRepository.save(product);
+
+        if (order.getStatus() == null || order.getStatus().isBlank()) {
+            order.setStatus("PENDING");
+        }
+
+        if (order.getOrderDate() == null) {
+            order.setOrderDate(LocalDateTime.now());
+        }
+
+        if (order.getTrackingNumber() == null ||
+                order.getTrackingNumber().isBlank()) {
+            order.setTrackingNumber("-");
+        }
+
+        return orderRepository.save(order);
+
     }
-
-    if (product.getStock() < order.getQuantity()) {
-        throw new RuntimeException("Not enough stock available.");
-    }
-
-    product.setStock(product.getStock() - order.getQuantity());
-    product.setSold(product.getSold() + order.getQuantity());
-
-    productRepository.save(product);
-
-    order.setStatus("Pending");
-    order.setOrderDate(LocalDateTime.now());
-
-    if (order.getTrackingNumber() == null || order.getTrackingNumber().isBlank()) {
-        order.setTrackingNumber("-");
-    }
-
-    return orderRepository.save(order);
-}
 
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
@@ -68,6 +83,22 @@ public class OrderService {
 
     public List<Order> getOrdersByEmail(String email) {
         return orderRepository.findByEmail(email);
+    }
+
+    public List<Order> getPendingOrders() {
+        return orderRepository.findByStatus("PENDING");
+    }
+
+    public List<Order> searchCustomer(String keyword) {
+        return orderRepository.findByCustomerNameContainingIgnoreCase(keyword);
+    }
+
+    public List<Order> getRecentOrders() {
+        return orderRepository.findTop10ByOrderByOrderDateDesc();
+    }
+
+    public long getPendingCount() {
+        return orderRepository.getPendingOrders();
     }
 
 }

@@ -4,9 +4,7 @@
 <head>
 
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>GodGive2Thrift Admin</title>
 
@@ -23,7 +21,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
 <div class="layout">
 
-<!-- Sidebar -->
+<!-- ================= SIDEBAR ================= -->
 
 <aside class="sidebar">
 
@@ -51,7 +49,7 @@ Products
 
 </a>
 
-<a href="#orders">
+<a href="#orders-section">
 
 <i class="fa-solid fa-box"></i>
 
@@ -59,11 +57,11 @@ Orders
 
 </a>
 
-<a href="#analytics">
+<a href="#customers-section">
 
-<i class="fa-solid fa-chart-line"></i>
+<i class="fa-solid fa-users"></i>
 
-Analytics
+Customers
 
 </a>
 
@@ -75,9 +73,7 @@ Website
 
 </a>
 
-<a href="#"
-
-onclick="logout();return false;">
+<a href="#" onclick="logout();return false;">
 
 <i class="fa-solid fa-right-from-bracket"></i>
 
@@ -87,91 +83,53 @@ Logout
 
 </aside>
 
-<!-- Main -->
+<!-- ================= MAIN ================= -->
 
 <main class="main">
 
 <header>
 
-<h1>
+<h1>Admin Dashboard</h1>
 
-Admin Dashboard
-
-</h1>
-
-<p id="welcome">
-
-Loading...
-
-</p>
+<p id="welcome">Loading...</p>
 
 </header>
+
+<!-- ================= DASHBOARD ================= -->
 
 <section class="cards">
 
 <div class="card">
-
 <h3>Products</h3>
-
-<h1 id="totalProducts">
-
-0
-
-</h1>
-
+<h1 id="totalProducts">0</h1>
 </div>
 
 <div class="card">
-
 <h3>Orders</h3>
-
-<h1 id="totalOrders">
-
-0
-
-</h1>
-
+<h1 id="totalOrders">0</h1>
 </div>
 
 <div class="card">
-
 <h3>Customers</h3>
-
-<h1 id="totalCustomers">
-
-0
-
-</h1>
-
+<h1 id="totalCustomers">0</h1>
 </div>
 
 <div class="card">
-
 <h3>Revenue</h3>
-
-<h1 id="revenue">
-
-₱0
-
-</h1>
-
+<h1 id="revenue">₱0</h1>
 </div>
 
 </section>
 
 <section class="chart-box">
 
-<h2>
+<h2>Monthly Revenue</h2>
 
-Monthly Revenue
-
-</h2>
-
-<canvas id="monthlyChart">
-
-</canvas>
+<canvas id="monthlyChart"></canvas>
 
 </section>
+
+<!-- ================= PRODUCTS ================= -->
 
 <section id="products">
 
@@ -179,7 +137,9 @@ Monthly Revenue
 
 <h2>Products</h2>
 
-<button class="add-btn" onclick="openProductModal()">
+<button
+class="add-btn"
+onclick="openProductModal()">
 
 <i class="fa-solid fa-plus"></i>
 
@@ -189,7 +149,197 @@ Add Product
 
 </div>
 
+<div class="search-box">
+
+<input
+type="text"
+id="searchProduct"
+placeholder="🔍 Search Products..."
+onkeyup="searchProducts()">
+
+</div>
+
 <div id="productTable">
+
+<div class="loading">
+
+<i class="fa-solid fa-spinner fa-spin"></i>
+
+Loading Products...
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= ORDERS ================= -->
+
+<section id="orders-section">
+
+<div class="section-header">
+
+<h2>Orders</h2>
+
+</div>
+
+<div class="search-box">
+
+<input
+type="text"
+id="searchOrders"
+placeholder="🔍 Search Customer or Tracking Number..."
+onkeyup="searchOrders()">
+
+<select
+id="statusFilter"
+onchange="searchOrders()">
+
+<option value="">All Status</option>
+<option value="PENDING">Pending</option>
+<option value="SHIPPED">Shipped</option>
+<option value="DELIVERED">Delivered</option>
+<option value="CANCELLED">Cancelled</option>
+
+</select>
+
+</div>
+
+<div id="ordersTable">
+
+Loading Orders...
+
+</div>
+
+</section>
+
+<!-- ================= CUSTOMERS ================= -->
+
+<section id="customers-section">
+
+<div class="section-header">
+
+<h2>Customers</h2>
+
+</div>
+
+<div class="search-box">
+
+<input
+type="text"
+id="searchCustomer"
+placeholder="🔍 Search Customer..."
+onkeyup="searchCustomers()">
+
+</div>
+
+<div id="customerTable">
+
+<div class="loading">
+
+Loading Customers...
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= ANALYTICS ================= -->
+
+<section id="analytics">
+
+<div class="section-header">
+
+<h2>
+
+Analytics
+
+</h2>
+
+</div>
+
+<div class="cards">
+
+<div class="card">
+
+<h3>Pending Orders</h3>
+
+<h1 id="pendingOrders">
+
+0
+
+</h1>
+
+</div>
+
+<div class="card">
+
+<h3>Delivered Orders</h3>
+
+<h1 id="deliveredOrders">
+
+0
+
+</h1>
+
+</div>
+
+<div class="card">
+
+<h3>Cancelled Orders</h3>
+
+<h1 id="cancelledOrders">
+
+0
+
+</h1>
+
+</div>
+
+<div class="card">
+
+<h3>Average Order</h3>
+
+<h1 id="averageOrder">
+
+₱0
+
+</h1>
+
+</div>
+
+</div>
+
+<div class="chart-box">
+
+<h2>
+
+Sales Distribution
+
+</h2>
+
+<canvas id="statusChart"></canvas>
+
+</section>
+
+<!-- ===========================
+TOP SELLING PRODUCTS
+=========================== -->
+
+<section id="topProducts">
+
+<div class="section-header">
+
+<h2>
+
+🏆 Top Selling Products
+
+</h2>
+
+</div>
+
+<div id="bestSellerTable">
 
 Loading...
 
@@ -197,54 +347,151 @@ Loading...
 
 </section>
 
-</main>
+<!-- ===========================
+LOW STOCK PRODUCTS
+=========================== -->
+
+<section id="lowStock">
+
+<div class="section-header">
+
+<h2>
+
+⚠ Low Stock Alerts
+
+</h2>
 
 </div>
+
+<div id="lowStockTable">
+
+Loading...
+
+</div>
+
+</section>
+<!-- ===========================
+RECENT ACTIVITY
+=========================== -->
+
+<section id="activity">
+
+<div class="section-header">
+
+<h2>
+
+📋 Recent Activity
+
+</h2>
+
+</div>
+
+<div id="activityList">
+
+Loading...
+
+</div>
+
+</section>
+</main>
+</div>
+<!-- ===========================
+SALES REPORT
+=========================== -->
+
+<section id="salesReport">
+
+<div class="section-header">
+
+<h2>
+
+📄 Sales Report
+
+</h2>
+
+<button
+class="add-btn"
+onclick="exportSalesCSV()">
+
+<i class="fa-solid fa-download"></i>
+
+Export CSV
+
+</button>
+
+</div>
+
+<div id="salesReportTable">
+
+Loading...
+
+</div>
+
+</section>
+<!-- ================= PRODUCT MODAL ================= -->
+
 <div id="productModal" class="modal">
 
 <div class="modal-content">
 
-<span class="close" onclick="closeProductModal()">
+<span class="close"
+onclick="closeProductModal()">
 
 &times;
 
 </span>
 
-<h2 id="modalTitle">
 <input
 type="hidden"
 id="productId">
+
+<h2 id="modalTitle">
+
 Add Product
 
 </h2>
 
-<input id="name" placeholder="Product Name">
+<label>Product Name</label>
 
-<input id="price" type="number" placeholder="Price">
+<input
+id="name"
+placeholder="Vintage Carhartt Jacket">
+
+<label>Price (₱)</label>
+
+<input
+id="price"
+type="number"
+min="1">
+
+<label>Category</label>
 
 <select id="category">
 
-    <option value="">Select Category</option>
-
-    <option>Jacket</option>
-
-    <option>Hoodie</option>
-
-    <option>Shirt</option>
-
-    <option>Pants</option>
-
-    <option>Shoes</option>
-
-    <option>Accessories</option>
+<option value="">Choose Category</option>
+<option>Jacket</option>
+<option>Hoodie</option>
+<option>Shirt</option>
+<option>Pants</option>
+<option>Shoes</option>
+<option>Accessories</option>
 
 </select>
 
-<input id="stock" type="number" placeholder="Stock">
+<label>Stock</label>
+
+<input
+id="stock"
+type="number"
+min="0">
+
+<label>Description</label>
 
 <textarea
 id="description"
-placeholder="Description"></textarea>
+placeholder="Describe this product..."></textarea>
+
+<label>Product Image</label>
 
 <input
 type="file"
@@ -267,6 +514,142 @@ onclick="saveProduct()">
 </div>
 
 </div>
+
+<!-- ================= ORDER MODAL ================= -->
+
+<div id="orderModal" class="modal">
+
+<div class="modal-content">
+
+<span
+class="close"
+onclick="closeOrderModal()">
+
+&times;
+
+</span>
+
+<h2>Order Details</h2>
+
+<hr><br>
+
+<label>Tracking Number</label>
+
+<input
+id="trackingNumber"
+type="text">
+
+<p><strong>Customer:</strong> <span id="viewCustomer"></span></p>
+<p><strong>Email:</strong> <span id="viewEmail"></span></p>
+<p><strong>Phone:</strong> <span id="viewPhone"></span></p>
+<p><strong>Address:</strong> <span id="viewAddress"></span></p>
+
+<br>
+
+<p><strong>Product:</strong> <span id="viewProduct"></span></p>
+<p><strong>Quantity:</strong> <span id="viewQuantity"></span></p>
+<p><strong>Total:</strong> ₱<span id="viewTotal"></span></p>
+
+<br>
+
+<p><strong>Payment:</strong> <span id="viewPayment"></span></p>
+<p><strong>GCash Reference:</strong> <span id="viewReference"></span></p>
+
+<br>
+
+<img
+id="paymentProofPreview"
+class="preview">
+
+<br>
+
+<label>Order Status</label>
+
+<select id="orderStatus">
+
+<option>PENDING</option>
+<option>SHIPPED</option>
+<option>DELIVERED</option>
+<option>CANCELLED</option>
+
+</select>
+
+<br><br>
+
+<div style="display:flex;gap:10px;">
+
+<button
+class="save-btn"
+style="flex:1;background:#16A34A;"
+onclick="approvePayment()">
+
+✅ Approve Payment
+
+</button>
+
+<button
+class="save-btn"
+style="flex:1;background:#DC2626;"
+onclick="rejectPayment()">
+
+❌ Reject Payment
+
+</button>
+
+</div>
+
+<br>
+
+<button
+class="save-btn"
+onclick="updateOrderStatus()">
+
+💾 Save Changes
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ================= CUSTOMER MODAL ================= -->
+
+<div id="customerModal" class="modal">
+
+<div class="modal-content">
+
+<span
+class="close"
+onclick="closeCustomerModal()">
+
+&times;
+
+</span>
+
+<h2>Customer Details</h2>
+
+<hr><br>
+
+<p><strong>Name:</strong> <span id="customerName"></span></p>
+
+<p><strong>Email:</strong> <span id="customerEmail"></span></p>
+
+<br>
+
+<h3>Purchase History</h3>
+
+<div id="customerOrders">
+
+Loading...
+
+</div>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script src="/js/admin.js"></script>
 
 </body>

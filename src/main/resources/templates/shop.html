@@ -4,33 +4,32 @@
 <head>
 
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <title>GodGive2Thrift | Premium Thrift Clothing</title>
 
-    <title>Shop | GodGive2Thrift</title>
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet">
-
+    <!-- Font Awesome -->
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-    <link rel="stylesheet"
-          href="/css/style.css">
+    <!-- Shop CSS -->
+    <link rel="stylesheet" href="/css/shop.css">
 
 </head>
 
 <body>
 
-<header>
+<!-- ===========================
+        NAVBAR
+=========================== -->
+
+<header class="navbar">
 
     <div class="logo">
 
@@ -42,17 +41,37 @@
 
     </div>
 
+    <div class="search-box">
+
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+        <input
+            id="search"
+            type="text"
+            placeholder="Search vintage clothing..."
+            onkeyup="filterProducts()">
+
+    </div>
+
     <nav>
 
         <a href="/">Home</a>
 
-        <a href="/shop">Shop</a>
+        <a href="/shop" class="active">
+
+            Shop
+
+        </a>
+
+        <a href="/wishlist">
+
+            <i class="fa-regular fa-heart"></i>
+
+        </a>
 
         <a href="/cart">
 
             <i class="fa-solid fa-cart-shopping"></i>
-
-            Cart
 
         </a>
 
@@ -62,81 +81,130 @@
 
 </header>
 
+<!-- ===========================
+        HERO
+=========================== -->
+
 <section class="hero">
 
-    <h1>
+    <div class="hero-content">
 
-        Premium Thrift Collection
+        <p>
 
-    </h1>
+            PREMIUM THRIFT COLLECTION
 
-    <p>
+        </p>
 
-        Affordable • Authentic • Vintage Fashion
+        <h1>
 
-    </p>
+            Authentic Vintage Clothing
+
+        </h1>
+
+        <span>
+
+            Affordable • Authentic • Carefully Selected Pieces
+
+        </span>
+
+        <br><br>
+
+        <a href="#products" class="shop-btn">
+
+            Shop Now
+
+        </a>
+
+    </div>
 
 </section>
 
+<!-- ===========================
+        CATEGORY BUTTONS
+=========================== -->
+
+<section class="categories">
+
+    <button onclick="selectCategory('')">All</button>
+
+    <button onclick="selectCategory('Jacket')">Jackets</button>
+
+    <button onclick="selectCategory('Hoodie')">Hoodies</button>
+
+    <button onclick="selectCategory('Shirt')">Shirts</button>
+
+    <button onclick="selectCategory('Pants')">Pants</button>
+
+    <button onclick="selectCategory('Shoes')">Shoes</button>
+
+</section>
+
+<!-- ===========================
+        FILTERS
+=========================== -->
+
 <section class="toolbar">
 
-    <input
-
-        id="search"
-
-        type="text"
-
-        placeholder="🔍 Search products..."
-
-        onkeyup="filterProducts()">
-
     <select
-
         id="categoryFilter"
-
         onchange="filterProducts()">
 
         <option value="">All Categories</option>
-
-        <option value="Jacket">Jackets</option>
-
-        <option value="Hoodie">Hoodies</option>
-
-        <option value="Shirt">Shirts</option>
-
+        <option value="Jacket">Jacket</option>
+        <option value="Hoodie">Hoodie</option>
+        <option value="Shirt">Shirt</option>
         <option value="Pants">Pants</option>
-
         <option value="Shoes">Shoes</option>
 
     </select>
 
     <select
-
         id="sortFilter"
-
         onchange="filterProducts()">
 
-        <option value="">Sort</option>
-
+        <option value="">Sort By</option>
         <option value="low">Price Low → High</option>
-
         <option value="high">Price High → Low</option>
-
         <option value="az">A → Z</option>
-
         <option value="za">Z → A</option>
 
     </select>
 
 </section>
 
-<section
+<!-- ===========================
+        PRODUCTS
+=========================== -->
 
-    id="productList"
+<section id="products">
 
-    class="products">
+    <div class="section-title">
+
+        <h2>
+
+            Featured Products
+
+        </h2>
+
+        <p>
+
+            Discover our newest thrift collections.
+
+        </p>
+
+    </div>
+
+    <div
+        id="productList"
+        class="products">
+
+    </div>
 
 </section>
+
+<!-- ===========================
+        FOOTER
+=========================== -->
 
 <footer>
 
@@ -160,11 +228,80 @@
 
 </footer>
 
-<script src="/js/shop.js"></script>
+<!-- ===========================
+        PRODUCT MODAL
+=========================== -->
 
-<script src="/js/script.js"></script>
+<div
+    id="productModal"
+    class="product-modal">
+
+    <div class="product-modal-content">
+
+        <span
+            class="close-modal"
+            onclick="closeModal()">
+
+            &times;
+
+        </span>
+
+        <div class="modal-left">
+
+            <img
+                id="modalImage"
+                src=""
+                alt="Product Image">
+
+        </div>
+
+        <div class="modal-right">
+
+            <h2 id="modalName">
+
+            </h2>
+
+            <div
+                id="modalPrice"
+                class="modalPrice">
+
+            </div>
+
+            <div
+                id="modalStock"
+                class="modalStock">
+
+            </div>
+
+            <p id="modalDescription">
+
+            </p>
+
+            <button
+                id="modalCartButton"
+                class="cart-btn">
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                Add To Cart
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ===========================
+        JAVASCRIPT
+=========================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script src="/js/auth.js"></script>
+
+<script src="/js/shop.js"></script>
 
 </body>
 

@@ -9,6 +9,11 @@ import java.util.List;
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
     List<Order> findByEmail(String email);
+    List<Order> findByStatus(String status);
+
+List<Order> findByCustomerNameContainingIgnoreCase(String customerName);
+
+List<Order> findTop10ByOrderByOrderDateDesc();
 
     @Query("""
         SELECT COALESCE(SUM(o.total),0)
@@ -47,5 +52,10 @@ Double getTotalRevenue();
             ORDER BY YEAR(o.orderDate), MONTH(o.orderDate)
             """)
     List<Object[]> getMonthlySales();
-
+@Query("""
+       SELECT COUNT(o)
+       FROM Order o
+       WHERE o.status = 'PENDING'
+       """)
+long getPendingOrders();
 }

@@ -1,6 +1,16 @@
-let allProducts = [];
+// =======================================
+// GODGIVE2THRIFT SHOP
+// Part 1 - Load & Display Products
+// =======================================
 
-window.onload = function () {
+let allProducts = [];
+let filteredProducts = [];
+
+// ==========================
+// PAGE LOAD
+// ==========================
+
+window.onload = () => {
     loadProducts();
 };
 
@@ -8,32 +18,55 @@ window.onload = function () {
 // LOAD PRODUCTS
 // ==========================
 
-function loadProducts() {
+async function loadProducts() {
 
-    fetch("/api/products")
+    try {
 
-        .then(response => response.json())
+        const response = await fetch("/api/products");
 
-        .then(products => {
+        if (!response.ok) {
+            throw new Error("Failed to load products.");
+        }
 
-            allProducts = products;
+        allProducts = await response.json();
 
-            displayProducts(products);
+        filteredProducts = [...allProducts];
 
-        })
+        displayProducts(filteredProducts);
 
-        .catch(error => {
+    } catch (err) {
 
-            console.error(error);
+        console.error(err);
 
-            alert("Failed to load products.");
+        document.getElementById("productList").innerHTML = `
+            <div style="text-align:center;padding:60px;">
+                <h2>Unable to load products.</h2>
+            </div>
+        `;
 
-        });
+    }
+
+}
+
 // ==========================
 // DISPLAY PRODUCTS
 // ==========================
 
 function displayProducts(products) {
+
+    const container = document.getElementById("productList");
+
+    if (!products.length) {
+
+        container.innerHTML = `
+            <div style="text-align:center;padding:60px;">
+                <h2>No products found.</h2>
+            </div>
+        `;
+
+        return;
+
+    }
 
     let html = "";
 
@@ -41,19 +74,12 @@ function displayProducts(products) {
 
         html += `
 
-        <div class="card product-card">
+        <div class="product-card">
 
-            ${product.stock <= 3 && product.stock > 0 ? `
-                <div class="sale-badge">
-                    🔥 HOT
-                </div>
-            ` : ""}
-
-            <div class="badge">
-
-                ${product.category}
-
-            </div>
+            ${product.stock <= 3 && product.stock > 0
+                ? `<div class="badge">🔥 HOT</div>`
+                : ""
+            }
 
             <div class="favorite"
                  onclick="addToWishlist(${product.id})">
@@ -62,40 +88,42 @@ function displayProducts(products) {
 
             </div>
 
-            <a href="/product?id=${product.id}">
+            <div class="image-box">
 
                 <img
-                    class="product-image"
                     src="/api/products/image/${product.id}"
                     alt="${product.name}"
                     loading="lazy">
 
-            </a>
+                <div class="hover-buttons">
 
-            <div class="content">
+                    <button
+                        class="quick-btn"
+                        onclick="viewProduct(${product.id})">
+
+                        <i class="fa-solid fa-eye"></i>
+
+                        Quick View
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="product-info">
+
+                <small>
+
+                    ${product.category}
+
+                </small>
 
                 <h3>
 
-                    <a href="/product?id=${product.id}"
-                       style="text-decoration:none;color:black;">
-
-                        ${product.name}
-
-                    </a>
+                    ${product.name}
 
                 </h3>
-
-                <div class="price">
-
-                    ₱${Number(product.price).toLocaleString()}
-
-                </div>
-
-                <div class="old-price">
-
-                    ₱${Number(product.price * 1.35).toLocaleString()}
-
-                </div>
 
                 <div class="rating">
 
@@ -103,9 +131,15 @@ function displayProducts(products) {
 
                     <span>
 
-                        4.9 (120 Reviews)
+                        (4.9)
 
                     </span>
+
+                </div>
+
+                <div class="price">
+
+                    ₱${Number(product.price).toLocaleString()}
 
                 </div>
 
@@ -113,30 +147,28 @@ function displayProducts(products) {
 
                     ${
                         product.stock > 5
-                        ? "✅ In Stock (" + product.stock + ")"
+
+                        ? "✅ In Stock"
 
                         : product.stock > 0
-                        ? "⚠ Only " + product.stock + " left"
+
+                        ? `⚠ Only ${product.stock} left`
 
                         : "❌ Out of Stock"
+
                     }
 
                 </div>
 
-                <button
-                    onclick="viewProduct(${product.id})">
-
-                    👁 View Details
-
-                </button>
-
                 ${
                     product.stock > 0
 
-                    ? `
+                    ?
+
+                    `
 
                     <button
-
+                        class="cart-btn"
                         onclick="addToCart(
 
                             ${product.id},
@@ -147,7 +179,9 @@ function displayProducts(products) {
 
                         )">
 
-                        🛒 Add to Cart
+                        <i class="fa-solid fa-cart-shopping"></i>
+
+                        Add To Cart
 
                     </button>
 
@@ -157,14 +191,16 @@ function displayProducts(products) {
 
                     `
 
-                    <button disabled
-                            style="background:gray;cursor:not-allowed;">
+                    <button
+                        class="cart-btn"
+                        disabled>
 
                         Out of Stock
 
                     </button>
 
                     `
+
                 }
 
             </div>
@@ -175,7 +211,331 @@ function displayProducts(products) {
 
     });
 
-    document.getElementById("productList").innerHTML = html;
+    container.innerHTML = html;
 
 }
+// =======================================
+// PART 2 - SEARCH, FILTER & SORT
+// =======================================
+
+// ==========================
+// SEARCH + FILTER
+// ==========================
+
+function filterProducts() {
+
+    const keyword = document
+        .getElementById("search")
+        .value
+        .toLowerCase();
+
+    const category = document
+        .getElementById("categoryFilter")
+        .value;
+
+    const sort = document
+        .getElementById("sortFilter")
+        .value;
+
+    filteredProducts = allProducts.filter(product => {
+
+        const matchName =
+            product.name.toLowerCase().includes(keyword);
+
+        const matchCategory =
+            category === "" ||
+            product.category === category;
+
+        return matchName && matchCategory;
+
+    });
+
+    sortProducts(sort);
+
+}
+
+// ==========================
+// CATEGORY BUTTONS
+// ==========================
+
+function selectCategory(category) {
+
+    document.getElementById("categoryFilter").value = category;
+
+    filterProducts();
+
+}
+
+// ==========================
+// SORT PRODUCTS
+// ==========================
+
+function sortProducts(type) {
+
+    switch(type){
+
+        case "low":
+
+            filteredProducts.sort(
+                (a,b)=>a.price-b.price
+            );
+
+            break;
+
+        case "high":
+
+            filteredProducts.sort(
+                (a,b)=>b.price-a.price
+            );
+
+            break;
+
+        case "az":
+
+            filteredProducts.sort(
+                (a,b)=>
+                    a.name.localeCompare(b.name)
+            );
+
+            break;
+
+        case "za":
+
+            filteredProducts.sort(
+                (a,b)=>
+                    b.name.localeCompare(a.name)
+            );
+
+            break;
+
+    }
+
+    displayProducts(filteredProducts);
+
+}
+
+// ==========================
+// VIEW PRODUCT
+// ==========================
+
+function viewProduct(id) {
+
+    const product = allProducts.find(p => p.id === id);
+
+    if (!product) {
+        console.error("Product not found.");
+        return;
+    }
+
+    const modal = document.getElementById("productModal");
+    const image = document.getElementById("modalImage");
+    const name = document.getElementById("modalName");
+    const price = document.getElementById("modalPrice");
+    const stock = document.getElementById("modalStock");
+    const description = document.getElementById("modalDescription");
+    const cartButton = document.getElementById("modalCartButton");
+
+    if (
+        !modal ||
+        !image ||
+        !name ||
+        !price ||
+        !stock ||
+        !description ||
+        !cartButton
+    ) {
+        console.error("Product modal elements were not found.");
+        return;
+    }
+
+    image.src = "/api/products/image/" + product.id;
+    image.alt = product.name;
+
+    name.textContent = product.name;
+
+    price.textContent =
+        "₱" + Number(product.price).toLocaleString();
+
+    stock.textContent =
+        product.stock > 0
+            ? product.stock + " item(s) available"
+            : "Out of Stock";
+
+    description.textContent =
+        product.description || "No description available.";
+
+    cartButton.onclick = function () {
+        addToCart(
+            product.id,
+            product.name,
+            product.price
+        );
+    };
+
+    modal.style.display = "flex";
+}
+function closeModal(){
+
+    document.getElementById("productModal").style.display="none";
+
+}
+
+window.onclick=function(e){
+
+    const modal=document.getElementById("productModal");
+
+    if(e.target===modal){
+
+        closeModal();
+
+    }
+
+}
+// =======================================
+// PART 3 - CART & WISHLIST
+// =======================================
+
+// ==========================
+// ADD TO CART
+// ==========================
+
+async function addToCart(id, name, price) {
+
+    try {
+
+        const response = await fetch("/api/cart", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+
+                productId: id,
+                productName: name,
+                price: price,
+                quantity: 1
+
+            })
+
+        });
+
+        if (!response.ok) {
+
+            throw new Error();
+
+        }
+
+        Swal.fire({
+
+            icon: "success",
+
+            title: "Added to Cart",
+
+            text: name + " has been added.",
+
+            timer: 1800,
+
+            showConfirmButton: false
+
+        });
+
+    } catch (e) {
+
+        console.error(e);
+
+        Swal.fire({
+
+            icon: "error",
+
+            title: "Cart Error",
+
+            text: "Unable to add this product."
+
+        });
+
+    }
+
+}
+
+// ==========================
+// ADD TO WISHLIST
+// ==========================
+
+async function addToWishlist(id){
+
+    try{
+
+        const response = await fetch("/api/wishlist",{
+
+            method:"POST",
+
+            headers:{
+                "Content-Type":"application/json"
+            },
+
+            body:JSON.stringify({
+
+                productId:id
+
+            })
+
+        });
+
+        if(!response.ok){
+
+            throw new Error();
+
+        }
+
+        Swal.fire({
+
+            icon:"success",
+
+            title:"Added to Wishlist",
+
+            timer:1500,
+
+            showConfirmButton:false
+
+        });
+
+    }catch(e){
+
+        console.error(e);
+
+        Swal.fire({
+
+            icon:"error",
+
+            title:"Wishlist Error",
+
+            text:"Unable to add product."
+
+        });
+
+    }
+
+}
+
+// ==========================
+// REFRESH PRODUCTS
+// ==========================
+
+function refreshProducts(){
+
+    displayProducts(filteredProducts);
+
+}
+
+// ==========================
+// UTILITIES
+// ==========================
+
+function formatPrice(price){
+
+    return "₱" + Number(price).toLocaleString();
+
 }

@@ -3,15 +3,15 @@ package com.godgive2thrift.controller;
 import com.godgive2thrift.entity.Order;
 import com.godgive2thrift.service.OrderService;
 import org.springframework.http.MediaType;
-import org.springframework.util.StringUtils;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.http.HttpHeaders;
 
 import java.io.IOException;
-import java.nio.file.*;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
+
 
 @RestController
 @RequestMapping("/api/orders")
@@ -23,17 +23,13 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    private final Path uploadPath = Paths.get("uploads/payment-proofs");
+
 
     public OrderController(OrderService orderService) {
 
         this.orderService = orderService;
 
-        try {
-            Files.createDirectories(uploadPath);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+       
     }
 
     // ==========================
@@ -72,24 +68,26 @@ public class OrderController {
         order.setPaymentMethod(paymentMethod);
         order.setGcashReference(gcashReference);
 
-        order.setStatus("Pending");
+        order.setStatus("PENDING");
         order.setOrderDate(LocalDateTime.now());
 
-        order.setTrackingNumber("GGT-" + System.currentTimeMillis());
+        order.setTrackingNumber(
+        "GGT-" +
+        java.util.UUID.randomUUID()
+                .toString()
+                .substring(0,8)
+                .toUpperCase()
+);
 
         if (paymentProof != null && !paymentProof.isEmpty()) {
 
-            String fileName = UUID.randomUUID() + "_"
-                    + StringUtils.cleanPath(paymentProof.getOriginalFilename());
+    order.setPaymentProof(
 
-            Files.copy(
-                    paymentProof.getInputStream(),
-                    uploadPath.resolve(fileName),
-                    StandardCopyOption.REPLACE_EXISTING
-            );
+            paymentProof.getBytes()
 
-            order.setPaymentProof(fileName);
-        }
+    );
+
+}
 
     try {
 
@@ -120,6 +118,20 @@ public class OrderController {
     public List<Order> getOrders() {
         return orderService.getAllOrders();
     }
+    // ==========================
+// GET SINGLE ORDER
+// ==========================
+
+@GetMapping("/{id}")
+public Order getOrder(
+
+        @PathVariable Long id
+
+) {
+
+    return orderService.getOrder(id);
+
+}
 
     // ==========================
     // UPDATE STATUS
@@ -169,9 +181,40 @@ public class OrderController {
     // ==========================
     // DELETE ORDER
     // ==========================
+// ==========================
+// PAYMENT PROOF IMAGE
+// ==========================
 
-    @DeleteMapping("/{id}")
-    public void deleteOrder(@PathVariable Long id) {
-        orderService.deleteOrder(id);
+@GetMapping("/payment-proof/{id}")
+public ResponseEntity<byte[]> getPaymentProof(@PathVariable Long id) {
+
+    Order order = orderService.getOrder(id);
+
+    if (order == null || order.getPaymentProof() == null) {
+
+        return ResponseEntity.notFound().build();
+
     }
+
+    return ResponseEntity.ok()
+            .header(HttpHeaders.CONTENT_TYPE, MediaType.IMAGE_JPEG_VALUE)
+            .body(order.getPaymentProof());
+
+}
+   @DeleteMapping("/{id}")
+public void deleteOrder(@PathVariable Long id) {
+
+    orderService.deleteOrder(id);
+
+}
+// ==========================
+// CUSTOMER ORDERS BY EMAIL
+// ==========================
+
+@GetMapping("/user/{email}")
+public List<Order> getOrdersByUser(@PathVariable String email) {
+
+    return orderService.getOrdersByEmail(email);
+
+}
 }

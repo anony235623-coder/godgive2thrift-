@@ -381,3 +381,259 @@ font-size:16px;
 background:#1D4ED8;
 
 }
+.loading{
+
+padding:60px;
+
+text-align:center;
+
+font-size:20px;
+
+color:#666;
+
+}
+
+.modal-content label{
+
+display:block;
+
+margin-top:18px;
+
+font-weight:600;
+
+color:#111827;
+
+}
+
+.modal-content select{
+
+width:100%;
+
+padding:12px;
+
+margin-top:10px;
+
+border-radius:8px;
+
+border:1px solid #ccc;
+
+font-size:15px;
+
+}
+
+.save-btn{
+
+margin-top:30px;
+
+}
+
+.product-table button{
+
+transition:.2s;
+
+}
+
+.product-table button:hover{
+
+transform:scale(1.05);
+
+}
+.loading{
+
+    padding:50px;
+
+    text-align:center;
+
+    color:#666;
+
+}
+.loading h3{
+
+    margin-bottom:10px;
+
+    color:#111827;
+
+}
+
+.loading p{
+
+    color:#666;
+
+}
+.search-box{
+
+    margin:20px 0;
+
+}
+
+.search-box input{
+
+    width:350px;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    border:1px solid #ddd;
+
+    font-size:15px;
+
+}
+#orders-section{
+
+margin-top:60px;
+
+}
+
+.order-status{
+
+padding:6px 12px;
+
+border-radius:20px;
+
+font-weight:bold;
+
+font-size:13px;
+
+display:inline-block;
+
+}
+
+.pending{
+
+background:#FEF3C7;
+
+color:#92400E;
+
+}
+
+.shipped{
+
+background:#DBEAFE;
+
+color:#1E40AF;
+
+}
+
+.delivered{
+
+background:#DCFCE7;
+
+color:#166534;
+
+}
+
+.cancelled{
+
+background:#FEE2E2;
+
+color:#991B1B;
+
+}
+#orderModal .modal-content{
+
+max-width:700px;
+
+}
+
+#orderModal p{
+
+margin:12px 0;
+
+font-size:15px;
+
+}
+
+#orderStatus{
+
+width:100%;
+
+padding:12px;
+
+margin-top:15px;
+
+border-radius:8px;
+
+border:1px solid #ccc;
+
+}
+#orders-section{
+
+margin-top:60px;
+
+}
+
+#ordersTable{
+
+margin-top:20px;
+
+}
+
+#paymentProofPreview{
+
+display:none;
+
+width:250px;
+
+height:auto;
+
+margin:20px auto;
+
+border-radius:12px;
+
+border:2px solid #ddd;
+
+object-fit:contain;
+
+}
+#orderModal .save-btn{
+
+margin-top:10px;
+
+}
+
+#orderModal button{
+
+font-weight:600;
+
+}
+#customers-section{
+
+margin-top:60px;
+
+}
+.activity-list{
+
+display:flex;
+
+flex-direction:column;
+
+gap:15px;
+
+margin-top:20px;
+
+}
+
+.activity-item{
+
+background:#fff;
+
+padding:15px;
+
+border-radius:12px;
+
+box-shadow:0 2px 10px rgba(0,0,0,.08);
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+}
+
+.activity-item small{
+
+color:#888;
+
+}

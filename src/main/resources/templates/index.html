@@ -120,13 +120,135 @@ color:#D4AF37;
 
 .hero{
 
-    height:90vh;
-    background: url("/images/richard.jpg") center center / cover no-repeat;
+    position:relative;
+
+    height:100vh;
+
+    background:
+    linear-gradient(rgba(0,0,0,.60),rgba(0,0,0,.60)),
+    url("/images/richard.jpg") center center/cover no-repeat;
+
     display:flex;
+
     justify-content:center;
+
     align-items:center;
+
     text-align:center;
+
+}
+
+.hero-content{
+
+    position:relative;
+
+    z-index:2;
+
+    max-width:850px;
+
+    padding:20px;
+
     color:white;
+
+}
+
+.hero-tag{
+
+    display:inline-block;
+
+    background:#FBBF24;
+
+    color:#111827;
+
+    padding:10px 22px;
+
+    border-radius:50px;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    letter-spacing:2px;
+
+    margin-bottom:25px;
+
+}
+
+.hero h1{
+
+    font-size:72px;
+
+    line-height:1.1;
+
+    margin-bottom:25px;
+
+}
+
+.hero p{
+
+    font-size:22px;
+
+    color:#e5e7eb;
+
+    margin-bottom:40px;
+
+}
+
+.hero-buttons{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+.btn-primary{
+
+    padding:18px 45px;
+
+    background:#FBBF24;
+
+    color:#111827;
+
+    border-radius:40px;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+}
+
+.btn-primary:hover{
+
+    background:white;
+
+}
+
+.btn-secondary{
+
+    padding:18px 45px;
+
+    border:2px solid white;
+
+    border-radius:40px;
+
+    color:white;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+}
+
+.btn-secondary:hover{
+
+    background:white;
+
+    color:#111827;
 
 }
 
@@ -273,13 +395,111 @@ box-shadow:0 5px 15px rgba(0,0,0,.15);
 
 }
 
+/* ==========================
+   NEWSLETTER
+========================== */
+
 .newsletter{
 
-background:#D4AF37;
+    padding:100px 8%;
 
-padding:70px;
+    background:linear-gradient(135deg,#111827,#1F2937);
 
-text-align:center;
+    color:white;
+
+    text-align:center;
+
+}
+
+.newsletter-content{
+
+    max-width:700px;
+
+    margin:auto;
+
+}
+
+.newsletter span{
+
+    color:#FBBF24;
+
+    letter-spacing:3px;
+
+    font-weight:700;
+
+    font-size:14px;
+
+}
+
+.newsletter h2{
+
+    font-size:42px;
+
+    margin:20px 0;
+
+}
+
+.newsletter p{
+
+    color:#d1d5db;
+
+    margin-bottom:40px;
+
+    line-height:1.8;
+
+}
+
+.newsletter-form{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+
+}
+
+.newsletter-form input{
+
+    width:420px;
+
+    max-width:100%;
+
+    padding:18px;
+
+    border:none;
+
+    border-radius:50px;
+
+    font-size:16px;
+
+}
+
+.newsletter-form button{
+
+    padding:18px 40px;
+
+    border:none;
+
+    border-radius:50px;
+
+    background:#FBBF24;
+
+    color:#111827;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.newsletter-form button:hover{
+
+    background:white;
 
 }
 
@@ -389,191 +609,406 @@ margin-top:15px;
 
 <section class="hero">
 
-<div>
+    <div class="hero-overlay"></div>
 
-<h1>GodGive2Thrift</h1>
+    <div class="hero-content">
 
-<p>Premium Vintage Collection
+        <span class="hero-tag">
+            PREMIUM THRIFT COLLECTION
+        </span>
 
-Affordable • Authentic • One of a Kind</p>
+        <h1>
+            Wear Vintage.<br>
+            Wear Confidence.
+        </h1>
 
-<a href="/shop" class="btn">
+        <p>
+            Discover handpicked thrift clothing from premium brands at prices everyone can afford.
+        </p>
 
-Shop Now
+        <div class="hero-buttons">
 
-</a>
+            <a href="/shop" class="btn-primary">
 
-</div>
+                <i class="fa-solid fa-bag-shopping"></i>
 
-</section>
+                Shop Collection
 
-<section class="section">
+            </a>
 
-<h2>Shop By Category</h2>
+            <a href="#featured" class="btn-secondary">
 
-<div class="categories">
+                Explore
 
-<div class="category">
+            </a>
 
-<i class="fa-solid fa-shirt"></i>
+        </div>
 
-<h3>T-Shirts</h3>
-
-</div>
-
-<div class="category">
-
-<i class="fa-solid fa-user-tie"></i>
-
-<h3>Jackets</h3>
-
-</div>
-
-<div class="category">
-
-<i class="fa-solid fa-shoe-prints"></i>
-
-<h3>Shoes</h3>
-
-</div>
-
-<div class="category">
-
-<i class="fa-solid fa-hat-cowboy"></i>
-
-<h3>Accessories</h3>
-
-</div>
-
-</div>
+    </div>
 
 </section>
 
-<section class="stats">
+<!-- ================= CATEGORIES ================= -->
 
-<div>
+<section class="section categories-section">
 
-<h1>500+</h1>
+    <div class="section-header">
 
-<p>Products</p>
+        <span>SHOP BY CATEGORY</span>
 
-</div>
+        <h2>Find Your Perfect Style</h2>
 
-<div>
+        <p>
+            Browse our carefully selected thrift collections.
+        </p>
 
-<h1>300+</h1>
+    </div>
 
-<p>Customers</p>
+    <div class="categories-grid">
 
-</div>
+        <a href="/shop?category=Shirt" class="category-card">
 
-<div>
+            <i class="fa-solid fa-shirt"></i>
 
-<h1>99%</h1>
+            <h3>Shirts</h3>
 
-<p>Satisfaction</p>
+            <p>Vintage tees & polos</p>
 
-</div>
+        </a>
 
-<div>
+        <a href="/shop?category=Jacket" class="category-card">
 
-<h1>24/7</h1>
+            <i class="fa-solid fa-user-tie"></i>
 
-<p>Support</p>
+            <h3>Jackets</h3>
 
-</div>
+            <p>Denim, Varsity & Carhartt</p>
+
+        </a>
+
+        <a href="/shop?category=Pants" class="category-card">
+
+            <i class="fa-solid fa-person"></i>
+
+            <h3>Pants</h3>
+
+            <p>Cargo, Denim & Workwear</p>
+
+        </a>
+
+        <a href="/shop?category=Shoes" class="category-card">
+
+            <i class="fa-solid fa-shoe-prints"></i>
+
+            <h3>Shoes</h3>
+
+            <p>Nike, Adidas & More</p>
+
+        </a>
+
+    </div>
+
+</section>
+
+<!-- ================= FEATURED PRODUCTS ================= -->
+
+<section class="featured-products" id="featured">
+
+    <div class="section-header">
+
+        <span>NEW ARRIVALS</span>
+
+        <h2>Featured Products</h2>
+
+        <p>
+
+            Fresh thrift finds added regularly.
+
+        </p>
+
+    </div>
+
+    <div id="bestSellerProducts" class="featured-grid">
+
+    </div>
 
 </section>
 
-<section class="section">
+<!-- ================= TESTIMONIALS ================= -->
 
-<h2>Customer Reviews</h2>
+<section class="testimonials-section">
 
-<div class="testimonials">
+    <div class="section-header">
 
-<div class="review">
+        <span>HAPPY CUSTOMERS</span>
 
-⭐⭐⭐⭐⭐
+        <h2>What Our Customers Say</h2>
 
-<p>
+        <p>
+            Trusted by thrift lovers across the Philippines.
+        </p>
 
-"Excellent quality and very affordable!"
+    </div>
 
-</p>
+    <div class="testimonial-grid">
 
-<b>- Clifford</b>
+        <div class="testimonial-card">
 
-</div>
+            <img src="/images/clifford.png" alt="Customer">
 
-<div class="review">
+            <h3>Clifford</h3>
 
-⭐⭐⭐⭐⭐
+            <div class="stars">
+                ★★★★★
+            </div>
 
-<p>
+            <p>
+                "Excellent quality! The clothes arrived exactly as described and looked even better in person."
+            </p>
 
-"Fast delivery and authentic products."
+        </div>
 
-</p>
+        <div class="testimonial-card">
 
-<b>- Casilhard</b>
+            <img src="/images/Casil.png" alt="Customer">
 
-</div>
+            <h3>Casilhard</h3>
 
-<div class="review">
+            <div class="stars">
+                ★★★★★
+            </div>
 
-⭐⭐⭐⭐⭐
+            <p>
+                "Affordable prices and fast shipping. I'll definitely order again!"
+            </p>
 
-<p>
+        </div>
 
-"My favorite thrift store online!"
+        <div class="testimonial-card">
 
-</p>
+            <img src="/images/brett.png" alt="Customer">
 
-<b>- Brett Castillon</b>
+            <h3>Brett Castillon</h3>
 
-</div>
+            <div class="stars">
+                ★★★★★
+            </div>
 
-</div>
+            <p>
+                "My favorite online thrift shop. The vintage collection is amazing."
+            </p>
+
+        </div>
+
+    </div>
 
 </section>
+
+<!-- ================= NEWSLETTER ================= -->
 
 <section class="newsletter">
 
-<h2>Subscribe to Our Newsletter</h2>
+    <div class="newsletter-content">
 
-<br>
+        <span>JOIN THE COMMUNITY</span>
 
-<input
-type="email"
-placeholder="Enter your email">
+        <h2>
 
-<button>
+            Never Miss a Thrift Drop
 
-Subscribe
+        </h2>
 
-</button>
+        <p>
+
+            Get exclusive offers, early access to new arrivals,
+            and special discounts delivered to your inbox.
+
+        </p>
+
+        <form class="newsletter-form">
+
+            <input
+                type="email"
+                placeholder="Enter your email address">
+
+            <button type="submit">
+
+                Subscribe
+
+            </button>
+
+        </form>
+
+    </div>
 
 </section>
 
+<!-- ================= BEST SELLERS ================= -->
+
+<section class="section" id="featured">
+
+    <h2>
+
+        🔥 Best Sellers
+
+    </h2>
+
+    <p class="section-subtitle">
+
+        Our most popular thrift collections.
+
+    </p>
+
+    <div
+        id="bestSellerProducts"
+        class="products">
+
+    </div>
+
+</section>
+
+<!-- ================= WHY CHOOSE US ================= -->
+
+<section class="section why-section">
+
+    <h2>
+
+        Why Shop With Us
+
+    </h2>
+
+    <div class="categories">
+
+        <div class="category">
+
+            <i class="fa-solid fa-certificate"></i>
+
+            <h3>Authentic Quality</h3>
+
+            <p>
+
+                Every item is carefully checked before being listed.
+
+            </p>
+
+        </div>
+
+        <div class="category">
+
+            <i class="fa-solid fa-truck-fast"></i>
+
+            <h3>Fast Shipping</h3>
+
+            <p>
+
+                Secure nationwide delivery across the Philippines.
+
+            </p>
+
+        </div>
+
+        <div class="category">
+
+            <i class="fa-solid fa-tags"></i>
+
+            <h3>Affordable Prices</h3>
+
+            <p>
+
+                Premium brands without premium prices.
+
+            </p>
+
+        </div>
+
+        <div class="category">
+
+            <i class="fa-solid fa-shield-halved"></i>
+
+            <h3>Secure Shopping</h3>
+
+            <p>
+
+                Safe checkout and trusted payment methods.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= FOOTER ================= -->
+
 <footer>
-<h2>🔥 Best Sellers</h2>
 
-<div id="bestSellerProducts" class="products"></div>
-<h2 style="color:#111">
+    <div class="footer-grid">
 
-GodGive2Thrift
+        <div>
 
-</h2>
+            <h2>GodGive2Thrift</h2>
 
-<footer>
+            <p>
 
-© 2026 GodGive2Thrift | All Rights Reserved
+                Premium thrift fashion for everyone.
+                Affordable. Authentic. Sustainable.
 
-</footer>
+            </p>
+
+        </div>
+
+        <div>
+
+            <h3>Quick Links</h3>
+
+            <a href="/">Home</a>
+            <a href="/shop">Shop</a>
+            <a href="/cart">Cart</a>
+
+        </div>
+
+        <div>
+
+            <h3>Customer Care</h3>
+
+            <a href="#">Shipping</a>
+            <a href="#">Returns</a>
+            <a href="#">Privacy Policy</a>
+
+        </div>
+
+        <div>
+
+            <h3>Follow Us</h3>
+
+            <div class="socials">
+
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+
+                <a href="#"><i class="fab fa-instagram"></i></a>
+
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <hr>
+
+    <p class="copyright">
+
+        © 2026 GodGive2Thrift. All Rights Reserved.
+
+    </p>
 
 </footer>
 
 <script src="/js/auth.js"></script>
+<script src="/js/script.js"></script>
 
 </body>
+
 </html>
