@@ -2,6 +2,7 @@ package com.godgive2thrift.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -9,63 +10,59 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http)
-            throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
 
-            .csrf(csrf -> csrf.disable())
+                // Enable CORS
+                .cors(Customizer.withDefaults())
 
-            .authorizeHttpRequests(auth -> auth
+                // Disable CSRF
+                .csrf(csrf -> csrf.disable())
 
-                // ==========================
-                // PUBLIC PAGES
-                // ==========================
-                .requestMatchers(
-                        "/",
-                        "/login",
-                        "/register",
-                        "/shop",
-                        "/cart",
-                        "/checkout",
-                        "/product",
-                        "/account",
-                        "/admin",
-                        "/orders",
-                        "/reports",
-                        "/css/**",
-                        "/js/**",
-                        "/images/**",
-                        "/api/auth/**"
-                ).permitAll()
+                // Authorization
+                .authorizeHttpRequests(auth -> auth
 
-                // ==========================
-                // PRODUCT API
-                // ==========================
-                .requestMatchers("/api/products/**").permitAll()
+                        // Public Pages
+                        .requestMatchers(
+                                "/",
+                                "/login",
+                                "/register",
+                                "/shop",
+                                "/cart",
+                                "/checkout",
+                                "/product",
+                                "/account",
+                                "/admin",
+                                "/orders",
+                                "/reports",
 
-                // ==========================
-                // ORDER API
-                // ==========================
-                .requestMatchers("/api/orders/**").permitAll()
+                                // Static Resources
+                                "/css/**",
+                                "/js/**",
+                                "/images/**",
+                                "/uploads/**",
 
-                // ==========================
-                // DASHBOARD API
-                // ==========================
-                .requestMatchers("/api/dashboard/**").permitAll()
+                                // APIs
+                                "/api/auth/**",
+                                "/api/products/**",
+                                "/api/orders/**",
+                                "/api/dashboard/**"
+                        ).permitAll()
 
-                // Everything else
-                .anyRequest().permitAll()
+                        // Everything else
+                        .anyRequest().permitAll()
+                )
 
-            )
+                // Disable default login
+                .formLogin(form -> form.disable())
 
-            .formLogin(form -> form.disable())
+                // Disable HTTP Basic
+                .httpBasic(basic -> basic.disable())
 
-            .httpBasic(basic -> basic.disable())
-
-            .logout(logout -> logout.disable());
+                // Disable Logout
+                .logout(logout -> logout.disable());
 
         return http.build();
     }
-
 }

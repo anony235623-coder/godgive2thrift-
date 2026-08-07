@@ -14,21 +14,15 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
 
-        @Override
-public void addCorsMappings(CorsRegistry registry) {
-
-    registry.addMapping("/**")
-            .allowedOrigins(
-                    "http://localhost:8080",
-                    "https://www.godgive2thrift.com",
-                    "https://godgive2thrift.com"
-            )
-            .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-            .allowedHeaders("*")
-            .allowCredentials(true);
-
-}
-
+        registry.addMapping("/**")
+                .allowedOrigins(
+                        "http://localhost:8080",
+                        "https://www.godgive2thrift.com",
+                        "https://godgive2thrift.com"
+                )
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                .allowedHeaders("*")
+                .allowCredentials(true);
     }
 
     @Override
@@ -39,6 +33,5 @@ public void addCorsMappings(CorsRegistry registry) {
 
         registry.addResourceHandler("/uploads/**")
                 .addResourceLocations("file:" + uploadPath + "/");
-
     }
 }
