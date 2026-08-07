@@ -585,67 +585,99 @@ margin-top:15px;
 
 <body>
 
-<header>
+<header class="navbar">
 
     <div class="logo">
+        <a href="/">GodGive2Thrift</a>
+    </div>
 
-        GodGive2Thrift
+    <div class="search-box">
+
+    <i class="fa-solid fa-magnifying-glass"></i>
+
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Search Nike, Adidas, Carhartt..."
+        autocomplete="off">
+
+</div>
+
+    <nav class="nav-links">
+
+        <a href="/">
+            <i class="fa-solid fa-house"></i>
+            Home
+        </a>
+
+        <a href="/shop">
+            <i class="fa-solid fa-shirt"></i>
+            Shop
+        </a>
+
+        <a href="/cart" class="cart-link">
+            <i class="fa-solid fa-cart-shopping"></i>
+            Cart
+            <span class="cart-count">0</span>
+        </a>
+
+        <span id="accountMenu"></span>
+
+    </nav>
+
+</header>
+<section class="hero">
+<div class="hero-overlay"></div>
+
+<div class="hero-content">
+
+    <span class="hero-tag">
+        ✨ PREMIUM VINTAGE COLLECTION
+    </span>
+
+    <h1>
+        Wear Vintage.<br>
+        Own Your Style.
+    </h1>
+
+    <p>
+        Discover authentic thrift fashion from Nike, Adidas, Carhartt, Levi's, Champion, and more. Carefully selected pieces at prices you'll love.
+    </p>
+
+    <div class="hero-buttons">
+
+        <a href="/shop" class="btn-primary">
+            <i class="fa-solid fa-bag-shopping"></i>
+            Shop Now
+        </a>
+
+        <a href="#featured" class="btn-secondary">
+            <i class="fa-solid fa-fire"></i>
+            Best Sellers
+        </a>
 
     </div>
 
-    <nav id="navbar">
+    <div class="hero-stats">
 
-    <a href="/">Home</a>
+        <div class="stat">
+            <h2>500+</h2>
+            <span>Products</span>
+        </div>
 
-    <a href="/shop">Shop</a>
+        <div class="stat">
+            <h2>1,000+</h2>
+            <span>Happy Customers</span>
+        </div>
 
-    <a href="/cart">Cart</a>
-
-    <span id="accountMenu"></span>
-
-</nav>
-
-</header>
-
-<section class="hero">
-
-    <div class="hero-overlay"></div>
-
-    <div class="hero-content">
-
-        <span class="hero-tag">
-            PREMIUM THRIFT COLLECTION
-        </span>
-
-        <h1>
-            Wear Vintage.<br>
-            Wear Confidence.
-        </h1>
-
-        <p>
-            Discover handpicked thrift clothing from premium brands at prices everyone can afford.
-        </p>
-
-        <div class="hero-buttons">
-
-            <a href="/shop" class="btn-primary">
-
-                <i class="fa-solid fa-bag-shopping"></i>
-
-                Shop Collection
-
-            </a>
-
-            <a href="#featured" class="btn-secondary">
-
-                Explore
-
-            </a>
-
+        <div class="stat">
+            <h2>4.9★</h2>
+            <span>Customer Rating</span>
         </div>
 
     </div>
 
+</div>
 </section>
 
 <!-- ================= CATEGORIES ================= -->
@@ -705,30 +737,6 @@ margin-top:15px;
             <p>Nike, Adidas & More</p>
 
         </a>
-
-    </div>
-
-</section>
-
-<!-- ================= FEATURED PRODUCTS ================= -->
-
-<section class="featured-products" id="featured">
-
-    <div class="section-header">
-
-        <span>NEW ARRIVALS</span>
-
-        <h2>Featured Products</h2>
-
-        <p>
-
-            Fresh thrift finds added regularly.
-
-        </p>
-
-    </div>
-
-    <div id="bestSellerProducts" class="featured-grid">
 
     </div>
 

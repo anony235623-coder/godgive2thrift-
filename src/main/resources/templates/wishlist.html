@@ -11,7 +11,7 @@ crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
 rel="stylesheet">
 <meta charset="UTF-8">
-
+<link rel="stylesheet" href="/css/wishlist.css">
 <title>My Wishlist</title>
 
 <style>
@@ -94,9 +94,38 @@ button:active{
 
 <body>
 
-<h1>❤️ My Wishlist</h1>
+<header class="wishlist-header">
 
-<div id="wishlist"></div>
+    <a href="/" class="logo">
+        GodGive2Thrift
+    </a>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/shop">Shop</a>
+        <a href="/cart">Cart</a>
+        <a href="/wishlist" class="active">Wishlist</a>
+    </nav>
+
+</header>
+
+<section class="wishlist-banner">
+
+    <h1>❤️ My Wishlist</h1>
+
+    <p>
+        Save your favorite vintage finds and come back anytime.
+    </p>
+
+</section>
+
+<section class="wishlist-container">
+
+    <div id="wishlist" class="wishlist-grid">
+
+    </div>
+
+</section>
 
 <script src="/js/wishlist.js"></script>
 

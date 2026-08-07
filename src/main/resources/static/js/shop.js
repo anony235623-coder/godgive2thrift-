@@ -127,21 +127,27 @@ function displayProducts(products) {
 
                 <div class="rating">
 
-                    ⭐⭐⭐⭐⭐
+    <i class="fa-solid fa-star"></i>
+    <i class="fa-solid fa-star"></i>
+    <i class="fa-solid fa-star"></i>
+    <i class="fa-solid fa-star"></i>
+    <i class="fa-solid fa-star-half-stroke"></i>
 
-                    <span>
+    <span>4.8 (127 Reviews)</span>
 
-                        (4.9)
-
-                    </span>
-
-                </div>
+</div>
 
                 <div class="price">
 
-                    ₱${Number(product.price).toLocaleString()}
+    <span class="old-price">
+        ₱${Number(product.price * 1.25).toLocaleString()}
+    </span>
 
-                </div>
+    <span class="new-price">
+        ₱${Number(product.price).toLocaleString()}
+    </span>
+
+</div>
 
                 <div class="stock">
 
@@ -539,3 +545,12 @@ function formatPrice(price){
     return "₱" + Number(price).toLocaleString();
 
 }
+function updateCartBadge(){
+
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    document.getElementById("cartBadge").textContent = cart.length;
+
+}
+
+updateCartBadge();

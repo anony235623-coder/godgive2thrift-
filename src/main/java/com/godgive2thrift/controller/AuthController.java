@@ -11,7 +11,11 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/auth")
 @CrossOrigin(
-    origins = "http://localhost:8080",
+    origins = {
+        "http://localhost:8080",
+        "https://www.godgive2thrift.com",
+        "https://godgive2thrift.com"
+    },
     allowCredentials = "true"
 )
 public class AuthController {

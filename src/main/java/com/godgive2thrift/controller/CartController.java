@@ -9,7 +9,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/cart")
 @CrossOrigin(
-    origins = "http://localhost:8080",
+    origins = {
+        "http://localhost:8080",
+        "https://www.godgive2thrift.com",
+        "https://godgive2thrift.com"
+    },
     allowCredentials = "true"
 )
 public class CartController {

@@ -13,7 +13,11 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/wishlist")
 @CrossOrigin(
-    origins = "http://localhost:8080",
+    origins = {
+        "http://localhost:8080",
+        "https://www.godgive2thrift.com",
+        "https://godgive2thrift.com"
+    },
     allowCredentials = "true"
 )
 public class WishlistController {

@@ -68,4 +68,12 @@ public class Review {
     public void setReviewDate(LocalDateTime reviewDate) {
         this.reviewDate = reviewDate;
     }
+@PrePersist
+public void prePersist() {
+
+    if (reviewDate == null) {
+        reviewDate = LocalDateTime.now();
+    }
+
+}
 }

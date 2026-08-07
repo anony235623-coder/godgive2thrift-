@@ -61,4 +61,34 @@ async function loadFeaturedProducts() {
 
     }
 
+
+}
+const searchInput = document.getElementById("searchInput");
+
+if (searchInput) {
+
+    searchInput.addEventListener("keyup", function () {
+
+        const keyword = this.value.toLowerCase();
+
+        const cards = document.querySelectorAll(".product-card");
+
+        cards.forEach(card => {
+
+            const text = card.innerText.toLowerCase();
+
+            if (text.includes(keyword)) {
+
+                card.style.display = "";
+
+            } else {
+
+                card.style.display = "none";
+
+            }
+
+        });
+
+    });
+
 }

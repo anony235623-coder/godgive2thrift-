@@ -1628,3 +1628,39 @@ function exportSalesCSV(){
     });
 
 }
+function toggleNotifications(){
+
+    const panel =
+    document.getElementById("notificationPanel");
+
+    panel.style.display =
+        panel.style.display==="block"
+        ? "none"
+        : "block";
+
+}
+
+function loadNotifications(){
+
+    document.getElementById("notificationList").innerHTML=`
+
+        <div class="notification-item">
+            🛒 New order received
+        </div>
+
+        <div class="notification-item">
+            ⚠ Low stock: Carhartt Jacket
+        </div>
+
+        <div class="notification-item">
+            💰 Revenue updated
+        </div>
+
+    `;
+
+    document.getElementById("notificationCount")
+    .innerText=3;
+
+}
+
+loadNotifications();

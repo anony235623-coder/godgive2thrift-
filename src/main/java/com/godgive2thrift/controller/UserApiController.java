@@ -9,8 +9,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/users")
 @CrossOrigin(
-        origins = "http://localhost:8080",
-        allowCredentials = "true"
+    origins = {
+        "http://localhost:8080",
+        "https://www.godgive2thrift.com",
+        "https://godgive2thrift.com"
+    },
+    allowCredentials = "true"
 )
 public class UserApiController {
 

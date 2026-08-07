@@ -40,37 +40,82 @@ function loadWishlist(){
 
                 html += `
 
-                <div class="card">
+<div class="wishlist-card">
 
-                    <h2>${product.name}</h2>
+    <div class="wishlist-image">
 
-                    <p>₱${product.price}</p>
+        <img
+            src="/api/products/image/${product.id}"
+            alt="${product.name}">
 
-                    <img
-                    src="/api/products/image/${product.id}"
-                    width="180">
+    </div>
 
-                    <br><br>
+    <div class="wishlist-info">
 
-                    <button onclick="addToCartWishlist(
-                        ${product.id},
-                        '${product.name}',
-                        ${product.price}
-                    )">
+        <span class="wishlist-category">
+            ${product.category}
+        </span>
 
-                        🛒 Add to Cart
+        <h2>
+            ${product.name}
+        </h2>
 
-                    </button>
+        <div class="wishlist-rating">
+            ⭐⭐⭐⭐⭐
+            <span>4.9</span>
+        </div>
 
-                    <button onclick="removeWishlist(${product.id})">
+        <div class="wishlist-price">
 
-                        ❌ Remove
+            ₱${Number(product.price).toLocaleString()}
 
-                    </button>
+        </div>
 
-                </div>
+        <div class="wishlist-stock">
 
-                `;
+            ${
+                product.stock > 5
+                ? "✅ In Stock"
+                : product.stock > 0
+                ? `⚠ Only ${product.stock} left`
+                : "❌ Out of Stock"
+            }
+
+        </div>
+
+        <div class="wishlist-buttons">
+
+            <button
+                class="cart-btn"
+                onclick="addToCartWishlist(
+                    ${product.id},
+                    '${product.name.replace(/'/g,"\\'")}',
+                    ${product.price}
+                )">
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                Move to Cart
+
+            </button>
+
+            <button
+                class="remove-btn"
+                onclick="removeWishlist(${product.id})">
+
+                <i class="fa-solid fa-trash"></i>
+
+                Remove
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+`;
 
             });
 

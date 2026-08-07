@@ -11,8 +11,12 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/reports")
 @CrossOrigin(
-        origins = "http://localhost:8080",
-        allowCredentials = "true"
+    origins = {
+        "http://localhost:8080",
+        "https://www.godgive2thrift.com",
+        "https://godgive2thrift.com"
+    },
+    allowCredentials = "true"
 )
 public class ReportController {
 
